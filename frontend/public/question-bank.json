@@ -1,0 +1,1857 @@
+{
+  "course": "C++面向对象程序设计",
+  "chapters": {
+    "c1-绪论": {
+      "title": "绪论",
+      "topics": {
+        "编程语言概述": {
+          "questions": [
+            {
+              "id": 1, "type": "multiple_choice",
+              "stem": "2022年的年度编程语言（Programming language hall of fame）是______。",
+              "options": ["A. C", "B. C++", "C. JAVA", "D. Python", "E. C#"],
+              "answer": ["B"],
+              "explanation": "根据TIOBE官网2022年度编程语言评选结果，C++获得年度编程语言称号。可在tiobe.com查询。"
+            },
+            {
+              "id": 2, "type": "multiple_choice",
+              "stem": "以下关于Python和C++的说法正确的是______。",
+              "options": [
+                "A. Python不仅语法比C++简洁，速度也比C++快",
+                "B. Python的语法比C++简洁，但运行速度比C++慢",
+                "C. Python和C++都是面向对象的程序语言",
+                "D. Python是面向过程的程序语言"
+              ],
+              "answer": ["B", "C"],
+              "explanation": "B/C正确：Python语法简洁但解释执行较慢，C++编译执行更快。两者都支持面向对象。A错在速度，D错在Python也支持面向对象。"
+            }
+          ]
+        },
+        "面向对象基本概念": {
+          "questions": [
+            {
+              "id": 3, "type": "multiple_choice",
+              "stem": "以下属于面向对象程序设计特性的是______。",
+              "options": [
+                "A. 可玩性", "B. 兼容性",
+                "C. 抽象性", "D. 封装性",
+                "E. 密闭性", "F. 继承性", "G. 多态性"
+              ],
+              "answer": ["C", "D", "F", "G"],
+              "explanation": "面向对象四大特性：抽象性、封装性、继承性、多态性。可玩性/兼容性/密闭性不是OO特性。"
+            },
+            {
+              "id": 4, "type": "true_false",
+              "stem": "对象是一种包括数据域、方法及他们之间相互作用的数据结构实例。",
+              "answer": ["正确"],
+              "explanation": "对象是类的实例，包含数据成员（属性）和成员函数（方法），封装了数据和操作。"
+            },
+            {
+              "id": 5, "type": "true_false",
+              "stem": "类是具体的，对象是抽象的。",
+              "answer": ["错误"],
+              "explanation": "说反了：类是抽象的（一组对象的共同特征抽象），对象是具体的（类的实例化）。例如'学生'是类，'张三'是对象。"
+            }
+          ]
+        },
+        "C++发展史与IDE": {
+          "questions": [
+            {
+              "id": 6, "type": "multiple_choice",
+              "stem": "被称为C++之父的是______。",
+              "options": [
+                "A. 比尔·盖茨",
+                "B. 米歇尔·劳德鲁普",
+                "C. 布莱恩·劳德鲁普",
+                "D. 本贾尼·斯特劳斯特卢普",
+                "E. 拉斯穆斯·霍伊伦"
+              ],
+              "answer": ["D"],
+              "explanation": "Bjarne Stroustrup（本贾尼·斯特劳斯特卢普）于1979年在贝尔实验室开始开发C++，被称为C++之父。"
+            },
+            {
+              "id": 7, "type": "multiple_choice",
+              "stem": "以下关于IDE的描述中正确的是______。",
+              "options": [
+                "A. 全称是Integrated Development Environment，即集成开发环境",
+                "B. IDE通常能够一键编译运行程序",
+                "C. 不用IDE就不能编程",
+                "D. 本课程选用CodeBlocks这款比较轻便的IDE"
+              ],
+              "answer": ["A", "B", "D"],
+              "explanation": "C错误：可以用命令行+文本编辑器编程（如g++编译+vim），IDE不是必需的。A/B/D均正确。CodeBlocks是轻量级C++ IDE。"
+            }
+          ]
+        }
+      }
+    },
+    "c2-对C的扩充": {
+      "title": "C++对C语言的扩充",
+      "topics": {
+        "C++基础": {
+          "questions": [
+            {
+              "id": 1, "type": "multiple_choice",
+              "stem": "在C++中，源程序的拓展名为______。",
+              "options": ["A. c", "B. cpp", "C. cs", "D. obj"],
+              "answer": ["B"],
+              "explanation": "C++源文件扩展名为.cpp（.cxx/.cc也可）。.c是C语言，.cs是C#，.obj是编译后的目标文件。"
+            }
+          ]
+        },
+        "名字空间": {
+          "questions": [
+            {
+              "id": 2, "type": "multiple_choice",
+              "stem": "有名字空间定义 namespace Student{ int Num; }，则下列选项中可以正确调用到该名字空间中变量Num的语句是______。",
+              "options": ["A. Student::Num;", "B. using namespace Num;", "C. Num;", "D. Student.Num;"],
+              "answer": ["A"],
+              "explanation": "访问名字空间成员需用 名字空间名::成员名。B语法错误，C未引入空间，D是对象访问方式。"
+            }
+          ]
+        },
+        "兼容C语言的部分": {
+          "questions": [
+            {
+              "id": 6, "type": "multiple_choice",
+              "stem": "C++对C语言的许多语法都兼容，以下可兼容的部分有______。",
+              "options": [
+                "A. 基本数据类型、主函数语法",
+                "B. 变量与常量的定义、运算符和表达式",
+                "C. 程序运行结构（判断、循环和转移语句）",
+                "D. extern和static",
+                "E. 头文件、函数的基本语法",
+                "F. 函数的默认形参",
+                "G. 引用类型"
+              ],
+              "answer": ["A", "B", "C", "D", "E"],
+              "explanation": "F/G是C++新增特性，C语言不支持。函数的默认形参（void Func(int a=5)）和引用类型（int &a）是C++对C的扩充，不是兼容C的部分。A/B/C/D/E都是C和C++共有的语法。"
+            }
+          ]
+        },
+        "C++新结构体": {
+          "questions": [
+            {
+              "id": 3, "type": "multiple_choice",
+              "stem": "以下关于C++新结构体的说法正确的是______。",
+              "options": [
+                "A. 可定义成员变量",
+                "B. 可定义成员函数",
+                "C. 有存取权限控制，且默认公有",
+                "D. 有存取权限控制，且默认私有",
+                "E. 定义时无需区分结构体名与结构体类型名，例如struct A{};可直接声明结构体变量 A a;"
+              ],
+              "answer": ["A", "B", "C", "E"],
+              "explanation": "C++中struct与class几乎相同：可定义成员变量(A)和函数(B)，有权限控制但struct默认public(C正确D错)。C++中结构体名就是类型名，可直接A a声明变量(E正确)，不需要C语言的struct A a。"
+            },
+            {
+              "id": 4, "type": "multiple_choice",
+              "stem": "有代码段如下，则运行结果为______。\n#include<iostream>\nstruct A{ int data; void Init(){data=5;} };\nint main(){ A a; a.Init(); std::cout<<a.data; return 0; }",
+              "options": ["A. 编译不通过", "B. 0", "C. 5", "D. 6"],
+              "answer": ["C"],
+              "explanation": "struct默认public，成员函数Init()和成员变量data均可直接访问。a.Init()将data设为5，输出5。"
+            },
+            {
+              "id": 5, "type": "true_false",
+              "stem": "用 sizeof 计算得到的结构体变量的内存大小一定等于结构体成员所占用的内存大小之和。",
+              "answer": ["错误"],
+              "explanation": "由于字节对齐，结构体实际大小可能大于各成员大小之和。如 struct A{char ch; int i; float f; double d;}; sizeof可能为24而成员和为17。"
+            }
+          ]
+        }
+      }
+    },
+    "c3-类与对象": {
+      "title": "类与对象",
+      "topics": {
+        "友元的定义": {
+          "questions": [
+            {
+              "id": 1, "type": "multiple_choice",
+              "stem": "若有 class A, class B, void Func()，则定义 A 是 B 的友元（即 A 可调用 B 的私有成员）以及 Func 是 A 的友元时，以下选项正确的是______。",
+              "options": [
+                "A. 写在全局位置：friend class A for class B;",
+                "B. 写在全局位置：friend class A;",
+                "C. 写在全局位置：friend class B;",
+                "D. 写在类 A 中：friend class B;",
+                "E. 写在类 B 中：friend class A;",
+                "F. 写在函数 Func() 中：friend class A;",
+                "G. 写在类 A 中：friend void Func();"
+              ],
+              "answer": ["E", "G"],
+              "explanation": "A是B的友元→A可访问B的私有成员→在B中用 friend class A; 声明（E正确）。Func是A的友元→在A中用 friend void Func(); 声明（G正确）。友元声明必须写在被访问的类内部（授权方），不能写在全局或被授权方。"
+            },
+            {
+              "id": 2, "type": "fill_blank",
+              "stem": "友元可分为______和______两类。",
+              "answer": ["友元类", "友元函数"],
+              "explanation": "友元分两种：友元函数（friend 函数声明）和友元类（friend class 类名）。两者都在被访问类内部声明，授予外部函数或类访问私有成员的权限。"
+            }
+          ]
+        },
+        "友元的作用": {
+          "questions": [
+            {
+              "id": 2, "type": "true_false",
+              "stem": "若有3个类 A, B, C，其中 A 中有 friend class B; 且 B 中有 friend class C;，则 A 可调用 C 的私有成员。",
+              "answer": ["错误"],
+              "explanation": "友元关系不具有传递性。B是A的友元，C是B的友元，但C不是A的友元，A不能访问C的私有成员。友元关系单向、非传递。"
+            },
+            {
+              "id": 3, "type": "true_false",
+              "stem": "若有\nclass A { private: int data; friend class B; };\nclass B { void Func() { A a; a.data = 5; } };\n则必然出现编译错误。",
+              "answer": ["错误"],
+              "explanation": "B是A的友元类，所以B的成员函数Func()可以访问A的私有成员a.data。不会编译错误。友元类授权B的所有成员函数访问A的私有成员。"
+            },
+            {
+              "id": 4, "type": "true_false",
+              "stem": "若有\nclass A { private: int data; };\nclass B { void Func() { A a; a.data = 5; } friend class A; };\n则必然会出现编译错误。",
+              "answer": ["正确"],
+              "explanation": "A是B的友元（A可访问B的私有成员），但B不是A的友元。B::Func()试图访问A::data（私有），产生编译错误。友元关系是单向的。"
+            },
+            {
+              "id": 5, "type": "true_false",
+              "stem": "若有 friend double length(const Point2D &p1, const Point2D &p2); 且 length 函数体中访问了 p1.x 等私有成员，则因 p1.x 为私有而编译错误。",
+              "answer": ["错误"],
+              "explanation": "length是Point2D的友元函数，友元函数可以访问类的私有成员。p1.x和p1.y虽然是私有的，但友元函数有权限访问，不会编译错误。"
+            }
+          ]
+        },
+        "常成员的声明": {
+          "questions": [
+            {
+              "id": 3, "type": "multiple_choice",
+              "stem": "以下是类的常成员（变量或函数）的是______。",
+              "options": [
+                "A. const int a;",
+                "B. const int Func();",
+                "C. int Func() const;",
+                "D. int const a;",
+                "E. const int Func const();",
+                "F. const int Func const(const int);",
+                "G. const int Func const(const);"
+              ],
+              "answer": ["A", "C"],
+              "explanation": "常成员变量：const int a;（A正确，D中const位置不典型但也合法）。常成员函数：int Func() const;（C正确，const在参数列表后）。B是返回const int的普通函数。E/F/G语法错误。"
+            }
+          ]
+        },
+        "常成员函数": {
+          "questions": [
+            {
+              "id": 4, "type": "multiple_choice",
+              "stem": "以下关于常成员函数的说法正确的是______。",
+              "options": [
+                "A. 常成员函数中可以修改成员变量的值",
+                "B. 常成员函数中可以访问成员变量的值",
+                "C. 常成员函数中可以调用常成员函数",
+                "D. 常成员函数中可以调用非常成员函数",
+                "E. 为了形成良好的编程习惯，像访问器函数这样无需修改成员值的成员函数，要定义为常成员函数"
+              ],
+              "answer": ["B", "C", "E"],
+              "explanation": "B正确：常成员函数可读不可写。C正确：常函数可调用常函数。A错误：常函数不能修改成员变量。D错误：常函数不能调用非常函数（非常函数可能修改成员）。E正确：getter类建议加const。"
+            },
+            {
+              "id": 5, "type": "true_false",
+              "stem": "以下代码中的 getR 成员适合调用 setR 成员。\nclass Circle{\n    Point2D O;\n    double r;\npublic:\n    double getR() const;\n    void setR(double r);\n};",
+              "answer": ["错误"],
+              "explanation": "getR()是常成员函数（const修饰），不能调用非常成员函数setR()。常函数只能调用常函数，setR不是const所以不可在getR内调用。"
+            }
+          ]
+        },
+        "常对象": {
+          "questions": [
+            {
+              "id": 5, "type": "multiple_choice",
+              "stem": "以下关于常对象的说法正确的是______。",
+              "options": [
+                "A. 常对象就是建立时使用了 const 的对象",
+                "B. 常对象所有的成员变量不可修改",
+                "C. 常对象可以调用常成员函数",
+                "D. 调用常对象的非常成员函数时，会根据编译器和编译器版本的不同，产生警告或编译错误",
+                "E. 常对象通常和引用类型 & 一起作为函数的参数使用，以安全地阻止调用拷贝构造函数"
+              ],
+              "answer": ["A", "B", "C", "D", "E"],
+              "explanation": "全正确。常对象(const对象)不可修改成员，只能调用常成员函数，调用非常函数会报错/警告。常引用作参数可避免拷贝构造开销且保证不修改原对象。"
+            },
+            {
+              "id": 6, "type": "multiple_choice",
+              "stem": "若 A 类的对象需要高效且安全地向某函数中传参，则该参数适合设计为______。",
+              "options": [
+                "A. const A &a",
+                "B. const A a",
+                "C. A &a",
+                "D. A a"
+              ],
+              "answer": ["A"],
+              "explanation": "const A &a（常引用）既高效（不调用拷贝构造）又安全（函数内不可修改原对象）。B调用拷贝构造低效，C不安全可修改，D既低效又不安全。"
+            }
+          ]
+        },
+        "静态成员": {
+          "questions": [
+            {
+              "id": 6, "type": "multiple_choice",
+              "stem": "以下关于静态成员的说法正确的是______。",
+              "options": [
+                "A. 静态成员变量就是在普通成员变量的声明前增加 static 关键字",
+                "B. 静态成员变量的生命周期是整个程序运行期间，即程序开始前就存在，且直至程序运行结束才销毁",
+                "C. 静态成员变量不属于任何一个对象，而是属于整个类，且被所有的对象所共享，即内存中存储区域唯一",
+                "D. 静态成员函数的定义方式为：函数类型 函数名(参数表) static{函数体}",
+                "E. 静态成员函数常作为获取私有静态成员变量的访问器函数使用",
+                "F. 以下函数声明的语法合法：static int getNum() const;",
+                "G. 静态成员变量的初始化一般写在类外、主函数前，以保证在程序开始运行时有初值"
+              ],
+              "answer": ["A", "B", "C", "E", "G"],
+              "explanation": "D错误：static应放在函数类型前，不是参数表后。F错误：静态成员函数不能同时加const（无this指针）。其余均正确。"
+            },
+            {
+              "id": 7, "type": "multiple_choice",
+              "stem": "若有 Circle 类，其中 static int number; static int getNumber();，则将 number 初始化为 5 的正确方式是______。",
+              "options": [
+                "A. 直接在类中声明时指定：static int number = 5;",
+                "B. 在构造函数中编写：this->number = 5;",
+                "C. 在类外、主函数前编写：Circle::number = 5;",
+                "D. 在类外、主函数前编写：int Circle::number = 5;"
+              ],
+              "answer": ["D"],
+              "explanation": "静态成员变量必须在类外初始化，格式为：类型 类名::成员名 = 初值; 即 int Circle::number = 5;。A不允许（类内不能初始化非const静态成员）。B是每次构造对象都赋值，非初始化。C缺少类型声明。"
+            },
+            {
+              "id": 8, "type": "multiple_choice",
+              "stem": "若有 Circle 类，其中 static int number; static int getNumber(); 希望 getNumber() 作为 number 的访问器，则定义正确的是______。",
+              "options": [
+                "A. int getNumber() { return number; }",
+                "B. int getNumber() { return this->number; }",
+                "C. int getNumber() const { return this->number; }",
+                "D. int Circle::getNumber() { return number; }",
+                "E. int Circle::getNumber() { return this->number; }",
+                "F. int Circle::getNumber() const { return number; }",
+                "G. int Circle::getNumber() const { return this->number; }"
+              ],
+              "answer": ["D"],
+              "explanation": "静态成员函数在类外定义时：①不需要static关键字（声明时有即可）；②不能加const（无this指针）；③不能使用this指针。D正确：int Circle::getNumber() { return number; }。E/F/G使用了this或const均错误。"
+            },
+            {
+              "id": 9, "type": "fill_blank",
+              "stem": "圆类 Circle 用静态成员 number 统计数量（构造++number，析构--number）。主函数中 Circle circles[50]; 则 circles[0].getNumber()、circles[20].getNumber()、Circle::getNumber() 的输出分别为______（每空一行，共3行）。",
+              "answer": ["50", "50", "50"],
+              "explanation": "number是静态成员，被所有对象共享。创建50个Circle对象后number=50。无论通过哪个对象或类名调用getNumber()，都返回同一个number值50。"
+            },
+            {
+              "id": 10, "type": "true_false",
+              "stem": "若 A 类中有公有静态成员 static int s;，则以下每行输出全部相同。\nA a1; A a2; A a3[50];\ncout << a1.s << endl;\ncout << a2.s << endl;\ncout << a3[0].s << endl;\ncout << a3[49].s << endl;\ncout << A::s << endl;",
+              "answer": ["正确"],
+              "explanation": "静态成员属于类而非对象，所有对象共享同一份s。无论通过哪个对象（a1.s、a2.s、a3[0].s、a3[49].s）还是类名（A::s）访问，都是同一个变量，输出完全相同。"
+            }
+          ]
+        },
+        "静态常成员": {
+          "questions": [
+            {
+              "id": 10, "type": "multiple_choice",
+              "stem": "以下关于静态常成员的说法正确的是______。",
+              "options": [
+                "A. 静态常成员即同时被 static 和 const 修饰的成员",
+                "B. 静态常成员有恒定且共享的特点",
+                "C. 设计圆类时，π 适合被设计为静态常成员（每个圆对象使用同一个恒定不变的π值）",
+                "D. 静态常成员的初始化方式与常成员相同，要使用初始化列表"
+              ],
+              "answer": ["A", "B", "C"],
+              "explanation": "D错误：静态常成员不能使用初始化列表，应在类外初始化：const 类型 类名::成员名 = 初值;。"
+            },
+            {
+              "id": 11, "type": "multiple_choice",
+              "stem": "若 A 类中有成员为 const static double d;，则它的初始化方式为______。",
+              "options": [
+                "A. double A::d = 0.0;",
+                "B. const double A::d = 0.0;",
+                "C. 初始化列表中 d(0.0)"
+              ],
+              "answer": ["B"],
+              "explanation": "静态常成员在类外初始化，必须保留const和类型：const double A::d = 0.0;。A缺少const，C不能用初始化列表（那是普通常成员的方式）。"
+            }
+          ]
+        },
+        "对象数组": {
+          "questions": [
+            {
+              "id": 11, "type": "multiple_choice",
+              "stem": "关于对象数组的说法正确的是______。",
+              "options": [
+                "A. 若不使用大括号初始化，则必须定义参数为空的构造函数",
+                "B. 若使用大括号初始化，则必须定义参数为空的构造函数",
+                "C. 若使用大括号初始化，则每一个类名(构造参数表)实际上都是一个有名字的对象",
+                "D. 对象数组中每一个对象都是动态对象"
+              ],
+              "answer": ["A"],
+              "explanation": "不用大括号时系统调默认构造初始化每个元素→需要无参构造（或全部参数有默认值）。大括号方式用指定的构造参数，不需要无参构造。"
+            },
+            {
+              "id": 12, "type": "true_false",
+              "stem": "若有 class A，若要实现 A a[50]; 要么有无参数的构造函数，要么有所有参数均有默认形参的构造函数。",
+              "answer": ["正确"],
+              "explanation": "对象数组 A a[50] 需要为每个元素调用默认构造函数。要么显式定义无参构造，要么所有参数都有默认值（此时可当作无参调用）。"
+            },
+            {
+              "id": 13, "type": "true_false",
+              "stem": "若有 class A，若要实现 A a[3] = {A(1, 2), A(2, 3), A(3, 3)}; 要么有无参数的构造函数，要么有所有参数均有默认形参的构造函数。",
+              "answer": ["错误"],
+              "explanation": "大括号列表初始化中，每个元素通过 A(参数) 显式调用构造函数，不需要默认构造函数。只有不提供初始化列表的元素才需要默认构造。"
+            }
+          ]
+        },
+        "动态对象": {
+          "questions": [
+            {
+              "id": 12, "type": "multiple_choice",
+              "stem": "以下关于动态对象的说法正确的是______。",
+              "options": [
+                "A. 若动态分配时使用小括号，则动态分配一个动态对象，且小括号中代入构造函数参数",
+                "B. 若动态分配时使用中括号，则动态分配一个动态对象，且小括号中代入构造函数参数",
+                "C. 若动态分配时使用小括号，则分配动态对象数组，且小括号中代入数组长度",
+                "D. 若动态分配时使用中括号，则分配动态对象数组，且中括号中代入数组所占字节数"
+              ],
+              "answer": ["A"],
+              "explanation": "new 类名(参数) → 分配一个对象，小括号传构造参数（A正确）。new 类名[长度] → 分配对象数组，中括号是数组长度（不是字节数）。B/C/D均错。"
+            },
+            {
+              "id": 13, "type": "multiple_choice",
+              "stem": "以下关于动态对象销毁的说法正确的是______。",
+              "options": [
+                "A. 若使用小括号动态分配了1个动态对象，则 delete 时不加 []，且无需调用析构函数",
+                "B. 若使用小括号动态分配了1个动态对象，则 delete 时必须添加[]，以调用其析构函数",
+                "C. 若使用中括号分配了1组动态对象，则 delete 时不加 []，且无需调用析构函数",
+                "D. 若使用中括号分配了1组动态对象，则 delete 时必须添加 []，以调用动态数组中所有对象的析构函数"
+              ],
+              "answer": ["D"],
+              "explanation": "new 对象 → delete 对象（不加[]）；new 对象[n] → delete[] 对象（必须加[]才能调用所有元素的析构函数）。"
+            },
+            {
+              "id": 14, "type": "multiple_choice",
+              "stem": "若有 A 类，其构造参数为 (int a = 5)，则以下正确的是______。",
+              "options": [
+                "A. A a[10]; delete a;",
+                "B. A a[10]; delete[] a;",
+                "C. A *a = new A(5); delete a;",
+                "D. A *a = new A[5]; delete[] a;"
+              ],
+              "answer": ["C", "D"],
+              "explanation": "A/B错误：a[10]是栈上数组，不能用delete释放（自动析构）。C正确：new单个对象→delete。D正确：new对象数组→delete[]。构造参数有默认值，所以new A[5]合法（每个元素调默认构造）。"
+            }
+          ]
+        },
+        "组合对象": {
+          "questions": [
+            {
+              "id": 14, "type": "multiple_choice",
+              "stem": "以下关于组合对象的说法正确的是______。",
+              "options": [
+                "A. 使用初始化列表进行初始化，初始化顺序与声明顺序相同",
+                "B. 构造顺序与初始化列表顺序相关",
+                "C. 组合对象就是获取组合类中的所有属性"
+              ],
+              "answer": ["A"],
+              "explanation": "组合对象构造函数必须用初始化列表，调用顺序只与声明顺序有关，与初始化列表顺序无关。C错误：组合是'has-a'关系，不是获取全部属性。"
+            },
+            {
+              "id": 15, "type": "true_false",
+              "stem": "在线段类 Line2D 中，两个 Point2D 成员 p1 和 p2 称为组合对象。它们必须使用初始化列表代入构造函数的参数。它们的构造函数调用顺序只与声明顺序有关，与初始化列表无关。",
+              "answer": ["正确"],
+              "explanation": "组合对象（一个类的对象作为另一个类的成员）必须用初始化列表传递构造参数，构造顺序由声明顺序决定，与初始化列表中的顺序无关。"
+            },
+            {
+              "id": 16, "type": "multiple_choice",
+              "stem": "以下关于组合对象的说法正确的是______。",
+              "options": [
+                "A. 组合对象就是一个类的对象在另一个类中作为成员出现",
+                "B. 组合对象不需要调用构造函数和析构函数",
+                "C. 组合对象的初始化可以不用初始化列表",
+                "D. 组合对象的析构函数调用顺序与初始化列表中的编写顺序相反",
+                "E. 组合对象的析构函数调用顺序与初始化列表中的编写顺序相同",
+                "F. 组合对象的析构函数调用顺序与声明顺序相反",
+                "G. 组合对象的析构函数调用顺序与声明顺序相同"
+              ],
+              "answer": ["A", "F"],
+              "explanation": "A正确：组合即has-a关系。F正确：析构顺序与声明顺序相反（后声明先析构）。B/C错误：必须调用构造/析构，必须用初始化列表。D/E错误：顺序与初始化列表顺序无关。G错误：析构与声明顺序相反。"
+            },
+            {
+              "id": 17, "type": "multiple_choice",
+              "stem": "若有组合对象 a 和 b，它们的初始化列表编写顺序是 b→a，声明顺序是 a→b，则它们所在组合类的对象被销毁时，析构函数的调用顺序是______。",
+              "options": ["A. a→b", "B. b→a"],
+              "answer": ["B"],
+              "explanation": "构造顺序只与声明顺序有关（a→b），与初始化列表顺序无关。析构顺序与构造顺序相反，即 b→a。"
+            },
+            {
+              "id": 18, "type": "multiple_choice",
+              "stem": "若有 A 类，其中包含 B 类的组合对象 b，且 A 类的构造参数类型为 (int a)，B 类的构造参数类型为 (const char *, int)，则以下正确的 A 类构造函数头是______。",
+              "options": [
+                "A. A(int a):B(\"b\", a)",
+                "B. A(int a):b(\"b\", a)",
+                "C. A(int a):B(const char * str, int b)",
+                "D. A(int a):b(const char * str, int b)"
+              ],
+              "answer": ["B"],
+              "explanation": "初始化列表中用成员名（对象名b）而非类名B。格式：A(int a):b(\"b\",a){}。A/C用了类名B错误。D参数写类型声明错误。组合对象初始化必须用对象名+具体实参值。"
+            }
+          ]
+        },
+        "线段类的实现": {
+          "questions": [
+            {
+              "id": 17, "type": "coding",
+              "stem": "已有 Point2D 类（含 x, y, 构造函数），请实现 Line2D 类的成员函数。Line2D 含两个 Point2D 组合对象 p1, p2，以及构造函数 Line2D(x1,y1,x2,y2) 和 getLength()。",
+              "code": "class Point2D {\npublic:\n    double x, y;\n    Point2D(double x, double y);\n};\n\nclass Line2D {\n    Point2D p1, p2;\npublic:\n    Line2D(double x1, double y1, double x2, double y2);\n    double getLength();\n    ~Line2D();\n};",
+              "answer": ["Line2D::Line2D(double x1, double y1, double x2, double y2):p1(x1, y1), p2(x2, y2) {}"],
+              "explanation": "组合对象必须用初始化列表。getLength() = sqrt(pow(p1.x-p2.x,2)+pow(p1.y-p2.y,2))。建议加const。"
+            }
+          ]
+        },
+        "类的定义与语法": {
+          "questions": [
+            {
+              "id": 18, "type": "multiple_choice",
+              "stem": "以下符合类的语法定义的是______。",
+              "options": [
+                "A. class A{}",
+                "B. class A{};",
+                "C. template<class A>",
+                "D. typedef class {}A;"
+              ],
+              "answer": ["B"],
+              "explanation": "类定义必须以 class 类名{}; 形式，注意结尾分号不可省略。A少分号，C是模板声明，D语法错误。"
+            },
+            {
+              "id": 19, "type": "multiple_choice",
+              "stem": "关于成员函数的声明与定义，以下正确的是______。",
+              "options": [
+                "A. 类内直接定义：class Circle { double Area() { return PI*r*r; } };",
+                "B. 类内声明+类外定义：class Circle { double Area(); }; double Circle::Area() { return PI*r*r; }",
+                "C. 仅写类外定义：double Circle::Area(); 无类内声明"
+              ],
+              "answer": ["A", "B"],
+              "explanation": "成员函数可在类内直接定义（隐式inline），也可类内声明+类外定义（使用 类名::函数名 作用域限定）。C错误：不能只有类外定义而无类内声明。"
+            }
+          ]
+        },
+        "构造函数": {
+          "questions": [
+            {
+              "id": 20, "type": "multiple_choice",
+              "stem": "以下关于构造函数的说法正确的是______。",
+              "options": [
+                "A. 是需要手动调用的初始化函数",
+                "B. 调用时机在对象建立之时",
+                "C. 动态对象会调用构造函数，而静态对象不会调用",
+                "D. 静态对象会调用构造函数，而动态对象不会调用"
+              ],
+              "answer": ["B"],
+              "explanation": "构造函数在对象创建时自动调用（B正确），无需手动调用（A错误）。无论动态对象(new)还是静态/局部对象，都会调用构造函数（C/D错误）。"
+            },
+            {
+              "id": 21, "type": "multiple_choice",
+              "stem": "以下关于常成员、引用成员和动态数组成员的初始化说法错误的是______。",
+              "options": [
+                "A. 常成员可在声明时直接赋值，如 class Circle{const int ID = 1;};",
+                "B. 常成员要通过初始化列表进行初始化",
+                "C. 引用成员要通过初始化列表进行初始化",
+                "D. 动态数组成员以指针形式存储，需要在构造函数中动态分配，并在析构函数中释放内存"
+              ],
+              "answer": ["A"],
+              "explanation": "题目问错误的是：A错误，常成员不可在类内声明时直接赋值（C++11前），必须用初始化列表。B/C/D均正确。注意C++11起允许类内初始值，但传统C++教学中仍视A为错误。"
+            },
+            {
+              "id": 22, "type": "multiple_choice",
+              "stem": "以下必须使用初始化列表进行初始化的有______。",
+              "options": [
+                "A. const成员变量",
+                "B. 引用类型成员变量",
+                "C. static成员变量",
+                "D. 成员变量 int a;"
+              ],
+              "answer": ["A", "B"],
+              "explanation": "const成员和引用成员必须在初始化列表中初始化（A/B正确）。static成员在类外初始化。普通成员变量可在构造函数体内赋值，不必用初始化列表（但推荐用初始化列表效率更高）。"
+            },
+            {
+              "id": 23, "type": "true_false",
+              "stem": "以下代码会在注释行出现编译错误。\nclass A { int data; };\nint main() { A a; std::cout << a.data << std::endl; return 0; }",
+              "answer": ["错误"],
+              "explanation": "注释行 A a; 不会编译错误——系统会自动生成默认构造函数（无参）。编译错误出现在下一行 a.data（私有成员不可直接访问）。"
+            }
+          ]
+        },
+        "this指针": {
+          "questions": [
+            {
+              "id": 22, "type": "multiple_choice",
+              "stem": "以下关于this指针的说法正确的是______。",
+              "options": [
+                "A. 指向接收消息的对象",
+                "B. 地址与相应对象的地址不同",
+                "C. 语法为this.成员",
+                "D. 只能用来调用成员变量，不能用于调用成员函数"
+              ],
+              "answer": ["A"],
+              "explanation": "this是指向当前对象的指针，指向调用成员函数的那个对象（A正确）。其地址就是当前对象的地址（B错）。语法是 this->成员 而非 this.成员（C错）。可调用成员变量也可调用成员函数（D错）。"
+            }
+          ]
+        },
+        "对象的建立": {
+          "questions": [
+            {
+              "id": 23, "type": "multiple_choice",
+              "stem": "以下关于动态对象与静态对象的建立方式，说法错误的是______。",
+              "options": [
+                "A. 静态对象通过 对象名.成员名 访问",
+                "B. 动态对象通过 对象名->成员名 访问",
+                "C. 若构造函数参数表为空，则静态对象可使用 类名 对象名(); 的形式建立",
+                "D. 若构造函数参数表为空，则动态对象可使用 类名 *对象名 = new 类名(); 的形式建立",
+                "E. 若构造函数参数表不为空，则静态对象可使用 类名 对象名(构造参数表) 的形式建立",
+                "F. 若构造函数参数表不为空，则动态对象可使用 类名 *对象名 = new 类名(构造参数表); 的形式建立"
+              ],
+              "answer": ["C"],
+              "explanation": "题目问错误的是：C错误——类名 对象名(); 会被编译器解析为函数声明而非对象定义！无参构造应写为 类名 对象名;（不加括号）。A/B/D/E/F均正确。"
+            }
+          ]
+        },
+        "拷贝构造函数": {
+          "questions": [
+            {
+              "id": 24, "type": "multiple_choice",
+              "stem": "以下关于拷贝构造函数的说法错误的是______。",
+              "options": [
+                "A. 拷贝构造函数可分为浅拷贝构造函数与深拷贝构造函数",
+                "B. 浅拷贝构造函数是系统自动生成的拷贝构造函数，逻辑为逐个成员直接赋值",
+                "C. 深拷贝构造函数是人为重载的拷贝构造函数，其参数类型为类的常引用类型",
+                "D. 浅拷贝构造函数难以应对指针与数组等类型",
+                "E. 若 a 和 b 是两个对象，则在任意位置编写 a=b; 的语句，可调用拷贝构造函数",
+                "F. 若 a 和 b 是两个对象，则仅在建立对象时编写 类名 a = b; 或 类名 a(b); 的语句，可调用拷贝构造函数"
+              ],
+              "answer": ["E"],
+              "explanation": "题目问错误的是：E错误——a=b; 不是建立新对象，调用的是赋值运算符（operator=）而非拷贝构造函数。拷贝构造仅在建立对象时调用：类名 a=b; 或 类名 a(b);。A/B/C/D/F均正确。"
+            },
+            {
+              "id": 28, "type": "fill_blank",
+              "stem": "以下代码共调用了______次拷贝构造函数。",
+              "code": "void Func(A a) {}\nint main() {\n    A a1(0);\n    Func(a1);\n    A a2(a1);\n    A a3 = a2;\n    return 0;\n}",
+              "answer": ["3"],
+              "explanation": "①Func(a1)：传参调用1次拷贝构造。②A a2(a1)：直接调用拷贝构造1次。③A a3=a2：虽是=号但是建立新对象，调用拷贝构造1次。共3次。注意A a3=a2和A a3(a2)等价，都是拷贝构造。"
+            },
+            {
+              "id": 29, "type": "multiple_choice",
+              "stem": "以下关于类的指针成员的说法正确的是______。",
+              "options": [
+                "A. 若是动态数组成员，则最好在构造函数中 new，在析构函数中 delete",
+                "B. 适合使用系统自动生成的拷贝构造函数进行拷贝",
+                "C. 推荐重载拷贝构造函数以进行深拷贝",
+                "D. 浅拷贝通常难以用正确的逻辑处理指针、数组和引用成员"
+              ],
+              "answer": ["A", "C", "D"],
+              "explanation": "B错误：系统生成的浅拷贝只复制指针值（地址），导致两个对象指向同一内存→重复释放崩溃。A正确：构造new+析构delete是RAII思想。C/D正确：指针成员需要深拷贝（重载拷贝构造+赋值运算符）来独立分配内存。"
+            }
+          ]
+        },
+        "存取权限控制": {
+          "questions": [
+            {
+              "id": 25, "type": "multiple_choice",
+              "stem": "以下关于结构体和类的存取权限控制，说法正确的是______。",
+              "options": [
+                "A. 类的权限有3种，结构体的权限有2种",
+                "B. 结构体和类都具备公有、私有和保护三种权限存取类型",
+                "C. 私有权限是指类中可以访问其成员，而类外不可访问",
+                "D. 保护权限是指在未发生继承时类中可以访问其成员，而类外不可访问",
+                "E. 公有权限是指类中和类外都可以访问其成员",
+                "F. 私有权限是指类的成员可以访问，但类的对象不可访问",
+                "G. 结构体的默认权限为公有，而类的默认权限为私有"
+              ],
+              "answer": ["B", "C", "D", "E", "F", "G"],
+              "explanation": "全选除A。B正确：struct和class都有三种权限。C/D/E/F正确描述了三种权限。G正确：struct默认public，class默认private。A错误：两者都是3种权限。"
+            },
+            {
+              "id": 26, "type": "true_false",
+              "stem": "若定义某成员为私有，并通过类的对象访问，则出现编译错误。",
+              "answer": ["正确"],
+              "explanation": "私有成员只能被类的成员函数和友元访问，不能通过对象直接访问（对象.私有成员 会编译错误）。必须通过公有访问器/修改器间接访问。"
+            },
+            {
+              "id": 27, "type": "true_false",
+              "stem": "可通过访问器函数（getter）与修改器函数（setter）对私有成员进行访问和修改。",
+              "answer": ["正确"],
+              "explanation": "这是封装的核心理念：私有成员通过公有访问器(getter)读取、修改器(setter)写入，从而控制访问权限和数据验证。"
+            },
+            {
+              "id": 28, "type": "multiple_choice",
+              "stem": "以下关于类的存取权限的说法正确的是______。",
+              "options": [
+                "A. 类的默认权限是私有类型",
+                "B. 公有权限的成员在类内外都可访问",
+                "C. 私有权限的成员在类内外都不可访问",
+                "D. 保护权限的成员在类中可以访问，在类外不可访问"
+              ],
+              "answer": ["A", "B", "D"],
+              "explanation": "C错误：私有成员在类内可以访问（成员函数可访问），类外不可访问。A正确：class默认private。B正确：public内外皆可。D正确：protected类内可访问，类外（非派生类）不可。"
+            },
+            {
+              "id": 29, "type": "true_false",
+              "stem": "以下代码会在注释行出现编译错误。\nclass A { int data; };\nint main() { A a; std::cout << a.data << std::endl; return 0; }",
+              "answer": ["正确"],
+              "explanation": "class默认private，data是私有成员，不能通过对象a.data直接访问，注释行编译错误。struct则默认public可以通过。"
+            }
+          ]
+        },
+        "构造析构调用时机": {
+          "questions": [
+            {
+              "id": 29, "type": "fill_blank",
+              "stem": "以下程序的输出是怎样的？（每空一行，共10行）：",
+              "code": "#include <iostream>\n#include <cstring>\nusing namespace std;\n\nclass Hero {\n    int ID; bool gender; char* name;\npublic:\n    Hero(int ID, const char* name, bool gender) {\n        this->name = new char[strlen(name)];\n        strcpy(this->name, name);\n        cout << \"Constructor of \" << this->name << endl;\n    }\n    ~Hero() {\n        cout << \"Destructor of \" << this->name << endl;\n        delete[] this->name;\n    }\n};\n\nvoid testDestroy() {\n    Hero Shiranui(3, \"不知火舞\", false);\n    cout << \"Flag 3\" << endl;\n}\n\nint main() {\n    cout << \"Flag 1\" << endl;\n    Hero Dolia(1, \"朵莉亚\", false);\n    Hero *Gongsunli = new Hero(2, \"公孙离\", false);\n    delete Gongsunli;\n    cout << \"Flag 2\" << endl;\n    testDestroy();\n    cout << \"Flag 4\" << endl;\n    return 0;\n}",
+              "answer": ["Flag 1", "Constructor of 朵莉亚", "Constructor of 公孙离", "Destructor of 公孙离", "Flag 2", "Constructor of 不知火舞", "Flag 3", "Destructor of 不知火舞", "Flag 4", "Destructor of 朵莉亚"],
+              "explanation": "构造顺序：main中Dolia→Gongsunli(new)→delete Gongsunli（析构）→testDestroy()中Shiranui→Flag3→Shiranui析构（出函数）→main结束Dolia析构。动态对象delete才析构，静态对象出作用域自动析构。"
+            },
+            {
+              "id": 30, "type": "fill_blank",
+              "stem": "以下程序的输出是什么？（每空一行，共7行）：",
+              "code": "#include <iostream>\n#include <cstring>\nusing namespace std;\n\nclass Hero {\n    int ID; bool gender; char* name;\npublic:\n    Hero(int ID, const char* name, bool gender) {\n        this->name = new char[strlen(name)];\n        strcpy(this->name, name);\n        cout << \"Constructor of \" << this->name << endl;\n    }\n    ~Hero() {\n        cout << \"Destructor of \" << this->name << endl;\n        delete[] this->name;\n    }\n};\n\nHero &testDestroy(Hero *h1, Hero &h2){\n    cout << \"Flag 3\" << endl;\n    return *h1;\n}\n\nint main(){\n    cout << \"Flag 1\" << endl;\n    Hero Houyi(1, \"后羿\", true);\n    Hero *DFYao = new Hero(2, \"东方曜\", true);\n    cout << \"Flag 2\" << endl;\n    testDestroy(DFYao, Houyi);\n    cout << \"Flag 4\" << endl;\n    return 0;\n}",
+              "answer": ["Flag 1", "Constructor of 后羿", "Constructor of 东方曜", "Flag 2", "Flag 3", "Flag 4", "Destructor of 后羿"],
+              "explanation": "testDestroy参数为指针和引用→不调用拷贝构造。DFYao是动态对象未delete→不析构（内存泄漏！）。Houyi是静态对象→main结束时自动析构。注意东方曜没有Destructor输出。"
+            },
+            {
+              "id": 31, "type": "fill_blank",
+              "stem": "填写以下程序的输出：",
+              "code": "#include<iostream>\nusing namespace std;\nclass A{\npublic:\n    int data;\n    A(){ data=0; cout<<\"C \"<<data<<endl; }\n    A(int sign){ data=sign; cout<<\"C \"<<data<<endl; }\n    A(const A &obj){ data=obj.data; cout<<\"CC \"<<data<<endl; }\n    ~A(){ cout<<\"D \"<<data<<endl; data=0; }\n};\n\nA Func(A &a) {\n    a.data++;\n    A tmp(a.data);\n    tmp.data++;\n    return tmp;\n}\n\nint main(){\n    A *a1 = new A(5);\n    A a2(Func(*a1));\n    delete a1;\n    return 0;\n}",
+              "answer": ["C 5", "C 6", "D 6", "D 7"],
+              "explanation": "编译器优化（RVO）下：new A(5)→C 5；Func中a.data++为6→C 6；tmp.data++为7；返回时优化掉拷贝构造和tmp析构；delete a1→D 6；a2析构→D 7。无优化时会有CC 7和额外的D 7。"
+            }
+          ]
+        }
+      }
+    },
+    "综合基础": {
+      "title": "C++综合基础（历年真题）",
+      "topics": {
+        "面向对象基本特征": {
+          "questions": [
+            {
+              "id": 1, "type": "multiple_choice",
+              "stem": "C++所具有的抽象性、封装性、继承性和多态性是______程序设计的基本特征。",
+              "options": ["A. 面向对象", "B. 面向过程", "C. 面向内容", "D. 脚本语言"],
+              "answer": ["A"],
+              "explanation": "抽象、封装、继承、多态是面向对象程序设计的四大基本特征。"
+            }
+          ]
+        },
+        "函数重载": {
+          "questions": [
+            {
+              "id": 2, "type": "multiple_choice",
+              "stem": "函数重载是C++相较于C语言新增的一项重要特性，它是指______。",
+              "options": [
+                "A. 逻辑功能相同但参数类型不同的情形下的泛型编程方式",
+                "B. 同一符号名或函数名对应多种操作",
+                "C. 编译时将函数体代码重载到调用处",
+                "D. 函数调用时通过实参对带有默认参数的形参进行更高效赋值的过程"
+              ],
+              "answer": ["B"],
+              "explanation": "函数重载（Overloading）指同一函数名可对应多个不同参数列表的函数实现。A描述的是模板，C是内联，D是默认参数。"
+            }
+          ]
+        },
+        "函数模板": {
+          "questions": [
+            {
+              "id": 3, "type": "multiple_choice",
+              "stem": "若声明 template<class _T>void Swap(_T &a, _T &b); 则以下说法中正确的是______。",
+              "options": [
+                "A. 因没有使用指针类型，在函数体中难以实现 a 与 b 相应实参的交换",
+                "B. 因使用了取地址符号，在函数体中需要对 a 与 b 进行取内容操作",
+                "C. 因使用了引用类型，实现交换时函数体可写 {_T tmp=*a; *a=*b;*b=tmp;}",
+                "D. 因使用了函数模板，该函数可以适应多种类型"
+              ],
+              "answer": ["D"],
+              "explanation": "函数模板使函数可适应多种类型（D正确）。引用参数可直接操作实参，交换只需 {_T tmp=a; a=b; b=tmp;}，不需要指针解引用。"
+            }
+          ]
+        },
+        "引用类型": {
+          "questions": [
+            {
+              "id": 4, "type": "multiple_choice",
+              "stem": "以下关于引用类型的说法正确的是______。",
+              "options": [
+                "A. 可以作为参数使用并通过形参改变实参的值",
+                "B. 实际上是变量或对象的指针",
+                "C. 引用类型 int &a 可被赋值为整型，例如可被赋值为 3",
+                "D. 作用与C语言中的取地址符号相同，在C++中被赋予了新的名称"
+              ],
+              "answer": ["A"],
+              "explanation": "引用是变量的别名，作参数时可修改实参（A正确）。引用不是指针（B错），int &a=3不合法除非const引用（C错），&在C++中有多重含义（D错）。"
+            },
+            {
+              "id": 5, "type": "true_false",
+              "stem": "执行代码 int i = 4; int &j = i; 后，&i 和 &j 的内容完全一致。",
+              "answer": ["正确"],
+              "explanation": "j是i的引用（别名），它们共享同一内存地址，因此&i和&j（取地址运算）结果相同。"
+            },
+            {
+              "id": 6, "type": "true_false",
+              "stem": "定义引用时必须初始化。",
+              "answer": ["正确"],
+              "explanation": "引用必须在定义时初始化（int &j; 会编译错误），且初始化后不能再改变引用的绑定对象。"
+            }
+          ]
+        },
+        "名字空间": {
+          "questions": [
+            {
+              "id": 7, "type": "multiple_choice",
+              "stem": "有名字空间定义 namespace Student { int Num; }，则下列选项中可以正确调用到该名字空间中变量 Num 的语句是______。",
+              "options": ["A. Student::Num", "B. using namespace Num;", "C. Num", "D. student.Num"],
+              "answer": ["A"],
+              "explanation": "访问名字空间中成员需用 名字空间名::成员名。B语法错误（using namespace应跟空间名），C未引入空间，D是对象访问方式。"
+            },
+            {
+              "id": 8, "type": "true_false",
+              "stem": "名字空间可以重复使用，但不可以嵌套。",
+              "answer": ["错误"],
+              "explanation": "前半句正确：同一名字空间可多次定义（内容合并）。后半句错误：名字空间可以嵌套（namespace A { namespace B {} }），访问时 A::B::成员。"
+            }
+          ]
+        },
+        "结构体与类": {
+          "questions": [
+            {
+              "id": 9, "type": "multiple_choice",
+              "stem": "有代码段如下，则运行结果为______。\nstruct A{ int data; void Init(){data = 5;} };\nint main(){ A a; a.Init(); std::cout << a.data; return 0; }",
+              "options": ["A. 编译不通过", "B. 0", "C. 5", "D. 6"],
+              "answer": ["C"],
+              "explanation": "struct默认权限为public，成员函数Init()和成员变量data均可直接访问。a.Init()将data设为5，输出5。"
+            },
+            {
+              "id": 10, "type": "true_false",
+              "stem": "用 sizeof 计算得到的结构体变量的内存大小一定等于结构体成员所占用的内存大小之和。",
+              "answer": ["错误"],
+              "explanation": "由于字节对齐（内存对齐），结构体实际大小可能大于各成员大小之和。编译器会在成员之间插入填充字节以满足对齐要求。"
+            }
+          ]
+        },
+        "内联函数": {
+          "questions": [
+            {
+              "id": 11, "type": "fill_blank",
+              "stem": "为了提高程序执行效率，通常使用关键字 inline 将一些需要频繁调用的简短函数定义为______。",
+              "answer": ["内联函数"],
+              "explanation": "inline关键字将函数定义为内联函数，编译器在调用处展开函数体，避免函数调用开销，适合频繁调用的简短函数。"
+            }
+          ]
+        },
+        "动态内存": {
+          "questions": [
+            {
+              "id": 12, "type": "fill_blank",
+              "stem": "使用 new 为 int *data 动态申请 10 个 int 型存储空间的语句是______。",
+              "answer": ["int *data=new int[10];"],
+              "explanation": "动态数组分配语法：指针 = new 类型[元素个数]。释放用 delete[] data;。"
+            },
+            {
+              "id": 13, "type": "true_false",
+              "stem": "定义了 CPoint2D 类，则在代码 int main(){CPoint2D *P = new CPoint2D; return 0;} 中，对象 *P 存储在栈中，需要使用 delete P; 进行释放。",
+              "answer": ["错误"],
+              "explanation": "new 分配的内存在堆（heap）上，不是栈。P 是指针（在栈上），*P 是堆上的对象。确实需要 delete P 释放，但原因是堆内存，不是栈。"
+            }
+          ]
+        },
+        "成员访问运算符": {
+          "questions": [
+            {
+              "id": 14, "type": "fill_blank",
+              "stem": "对象可以直接通过 . 运算符来访问类的公有成员，对象指针可以通过 ______ 运算符来访问类的公有成员。",
+              "answer": ["->"],
+              "explanation": "对象.成员，对象指针->成员。-> 是成员访问运算符，等价于 (*指针).成员。"
+            }
+          ]
+        },
+        "成员函数存储": {
+          "questions": [
+            {
+              "id": 15, "type": "true_false",
+              "stem": "同一类的每个对象都具有自己的数据成员，所有对象共享成员函数的定义。",
+              "answer": ["正确"],
+              "explanation": "每个对象有独立的数据成员存储空间，但成员函数的代码只有一份，所有对象共享。this指针用于区分当前调用对象。"
+            }
+          ]
+        },
+        "STL基础": {
+          "questions": [
+            {
+              "id": 16, "type": "fill_blank",
+              "stem": "C++ 程序中，使用 cin、cout、endl 需要在程序中包含<______>头文件。",
+              "answer": ["iostream"],
+              "explanation": "cin/cout/endl 定义在 iostream 头文件中。需 #include <iostream> 并使用 using namespace std; 或 std:: 前缀。"
+            }
+          ]
+        },
+        "面向对象核心概念": {
+          "questions": [
+            {
+              "id": 17, "type": "fill_blank",
+              "stem": "在面向对象程序设计中，将一组对象的共同特征抽象出来形成______。",
+              "answer": ["类"],
+              "explanation": "类是对象的抽象，描述了一组具有相同属性和行为的对象。对象是类的实例。"
+            }
+          ]
+        }
+      }
+    },
+    "c3-类与对象-ext": {
+      "title": "类与对象（考试真题补充）",
+      "topics": {
+        "const用法": {
+          "questions": [
+            {
+              "id": 1, "type": "multiple_choice",
+              "stem": "在类中使用 const 修饰时，以下说法错误的是______。",
+              "options": [
+                "A. 若 const 出现在成员函数参数表后，则该函数内不可修改成员变量",
+                "B. 若 const 出现在成员函数返回类型前，则该函数内可以修改成员变量",
+                "C. 若 const 出现在声明成员变量时，则该变量应以初始化列表的形式初始化",
+                "D. 若 const 出现在声明静态成员变量时，则该变量可以在声明处用赋值号赋值"
+              ],
+              "answer": ["D"],
+              "explanation": "题目问错误的是：D错误——静态常成员变量不可在类内声明处赋值，必须在类外初始化：const 类型 类名::成员名=值;。A/B/C均正确。"
+            }
+          ]
+        },
+        "析构函数与构造": {
+          "questions": [
+            {
+              "id": 2, "type": "multiple_choice",
+              "stem": "下列关于析构函数调用时间的说法正确的是______。",
+              "options": [
+                "A. 析构函数可以通过 类名.~析构函数名() 的形式被调用",
+                "B. 在某个函数内建立的对象在整个程序运行结束时调用析构函数",
+                "C. 对于已动态分配内存的对象指针，使用 delete 释放内存时会调用析构函数",
+                "D. 在主函数内建立的对象，如果不手动销毁则不会调用析构函数"
+              ],
+              "answer": ["C"],
+              "explanation": "C正确：delete对象指针时自动调用析构函数。A错误：不能通过对象.~析构函数()手动调用。B错误：函数内局部对象在函数结束时析构。D错误：main中静态对象在程序结束时自动析构。"
+            },
+            {
+              "id": 3, "type": "fill_blank",
+              "stem": "类在实例化的时候，首先会调用它的______进行初始化，在对象生命周期结束的时候会调用析构函数进行资源销毁处理。",
+              "answer": ["构造函数"],
+              "explanation": "对象创建时自动调用构造函数进行初始化，销毁时自动调用析构函数进行清理。两者都不需要手动调用。"
+            },
+            {
+              "id": 4, "type": "fill_blank",
+              "stem": "类的______是一个特殊的成员函数，它在对象销毁时被自动调用。",
+              "answer": ["析构函数"],
+              "explanation": "析构函数在对象生命周期结束时自动调用，用于释放资源（动态内存、文件句柄等）。无返回值，无参数，不能重载。"
+            }
+          ]
+        },
+        "静态成员": {
+          "questions": [
+            {
+              "id": 5, "type": "multiple_choice",
+              "stem": "在 Test 类中定义有公有静态成员 static int number; 且 Test 类已实例化为对象 test，则以下对 number 成员的访问方式错误的是______。",
+              "options": [
+                "A. Test::number",
+                "B. test.number",
+                "C. 通过静态成员函数获取值",
+                "D. 通过 this 指针进行访问"
+              ],
+              "answer": ["D"],
+              "explanation": "题目问错误的是：D错误——静态成员属于类而非对象，不存在this指针。静态成员函数中没有this指针，不能通过this访问。A（类名::）、B（对象.）、C（静态函数）均可。"
+            },
+            {
+              "id": 6, "type": "true_false",
+              "stem": "可以在类的构造函数中对静态数据成员进行初始化。",
+              "answer": ["错误"],
+              "explanation": "静态成员属于整个类，不属于任何对象。若在构造函数中'初始化'，每创建一个对象就会重置一次。静态成员应在类外初始化：类型 类名::成员名 = 值;。"
+            }
+          ]
+        },
+        "友元": {
+          "questions": [
+            {
+              "id": 7, "type": "multiple_choice",
+              "stem": "以下关于友元的说法中错误的是______。",
+              "options": [
+                "A. 友元可分为友元函数和友元类",
+                "B. 若声明 X 类为 Y 类的友元，则 X 类和 Y 类可互相调用对方私有成员",
+                "C. 友元削弱了封装性",
+                "D. 友元函数不属于类的成员函数"
+              ],
+              "answer": ["B"],
+              "explanation": "题目问错误的是：B错误——友元关系是单向的！X是Y的友元→X可访问Y的私有成员，但Y不能访问X的私有成员（除非Y也被声明为X的友元）。A/C/D均正确。"
+            },
+            {
+              "id": 8, "type": "true_false",
+              "stem": "friend float Distance(CPoint2D p1, CPoint2D p2); 是 CPoint2D 的友元函数，若 P1、P2 为 CPoint2D 对象，则可通过 P1.Distance(P2) 调用该友元函数。",
+              "answer": ["错误"],
+              "explanation": "友元函数是普通函数（非成员函数），调用方式为 Distance(P1, P2)，不能用 P1.Distance(P2) 的对象.成员方式调用。友元函数不属于类。"
+            },
+            {
+              "id": 9, "type": "true_false",
+              "stem": "CMagician 类为 CHero 类的友元类，则 CHero 类的所有成员函数都是 CMagician 类的友元函数。",
+              "answer": ["错误"],
+              "explanation": "友元关系是单向的。CMagician是CHero的友元→CMagician可访问CHero的私有成员。但CHero不是CMagician的友元，CHero的成员函数不能访问CMagician的私有成员。"
+            },
+            {
+              "id": 10, "type": "true_false",
+              "stem": "友元破坏了类的封装性。",
+              "answer": ["正确"],
+              "explanation": "友元机制允许外部函数或类访问私有成员，确实削弱了封装性。但友元提供了必要的灵活性，是封装性的'受控破坏'，需谨慎使用。"
+            }
+          ]
+        },
+        "拷贝构造与深拷贝": {
+          "questions": [
+            {
+              "id": 11, "type": "fill_blank",
+              "stem": "已知学生类 Student，则自定义的拷贝构造函数可在类内声明为______。（按正确、高效且安全的方式作为参数类型）",
+              "answer": ["Student(const Student&)"],
+              "explanation": "拷贝构造函数的标准声明：类名(const 类名&)。const避免修改原对象，引用&避免无限递归拷贝。若不用引用，传参时会再次调用拷贝构造导致无限循环。"
+            },
+            {
+              "id": 12, "type": "fill_blank",
+              "stem": "当类中包含指向动态分配的内存的指针成员时，定义拷贝构造函数一般应采用______拷贝技术。",
+              "answer": ["深"],
+              "explanation": "深拷贝为指针成员重新分配内存并复制内容，避免浅拷贝导致的指针悬挂和重复释放问题。浅拷贝只是简单复制指针值（地址），两个对象指向同一块内存。"
+            }
+          ]
+        },
+        "常成员函数类外定义": {
+          "questions": [
+            {
+              "id": 13, "type": "fill_blank",
+              "stem": "假定 Point 为一个类，其公有成员函数 output() 的声明如下：class Point { public: void output() const; }; 若该函数在类体外定义，则其完整的函数头应为：______。",
+              "answer": ["void Point::output() const"],
+              "explanation": "常成员函数类外定义必须保留const关键字：返回类型 类名::函数名(参数表) const { 函数体 }。const是函数签名的一部分。"
+            }
+          ]
+        }
+      }
+    },
+    "c5-多态性": {
+      "title": "多态性",
+      "topics": {
+        "虚函数": {
+          "questions": [
+            {
+              "id": 0, "type": "fill_blank",
+              "stem": "虚函数可以使类型兼容时______的指针可以调用______的成员函数。",
+              "answer": ["基类", "派生类"],
+              "explanation": "虚函数的核心作用：基类指针/引用指向派生类对象时，通过虚函数表调用派生类重写的函数，实现动态多态。即基类指针调用派生类函数。"
+            },
+            {
+              "id": 1, "type": "multiple_choice",
+              "stem": "以下关于虚函数的描述正确的是______。",
+              "options": [
+                "A. 虚函数可以使类型兼容时基类的指针调用派生类的成员函数",
+                "B. 虚函数定义时在基类中一定要添加 virtual 关键字",
+                "C. 若函数原型为 double Area() const; 则将其定义为虚函数时可变为 virtual double Area() const;",
+                "D. 若函数原型为 double Area() const; 则在派生类中将其定义为虚函数时可变为 virtual double Area() const override;",
+                "E. 虚函数在派生类中重写时 virtual 关键字可写可不写",
+                "F. 基类中的虚函数无法被调用"
+              ],
+              "answer": ["A", "B", "C", "D", "E"],
+              "explanation": "全选除F。A是虚函数核心作用（动态多态）。B正确：基类必须加virtual。C/D正确展示了定义方式。E正确：派生类重写时virtual可省略（但建议加override）。F错误：基类虚函数可通过 基类::函数名() 调用。"
+            },
+            {
+              "id": 2, "type": "multiple_choice",
+              "stem": "以下关于虚函数的说法正确的是______。",
+              "options": [
+                "A. 静态成员函数可以被定义为虚函数",
+                "B. 友元函数可以被定义为虚函数",
+                "C. 构造函数可以被定义为虚函数",
+                "D. 析构函数可以被定义为虚函数"
+              ],
+              "answer": ["D"],
+              "explanation": "只有D正确：析构函数可以且应该被定义为虚函数。静态函数无this指针不可virtual，友元不是成员函数不可virtual，构造函数在对象创建时虚表未建立不可virtual。"
+            },
+            {
+              "id": 3, "type": "multiple_choice",
+              "stem": "若基类中有 virtual void Func() {}，则以下选项中正确的有______。",
+              "options": [
+                "A. 在派生类中必须重写这个函数",
+                "B. 基类的指针不能调用到派生类中重写的Func函数",
+                "C. 可以通过基类名::Func()调用到基类的函数",
+                "D. 这个基类可以被称为抽象类"
+              ],
+              "answer": ["C"],
+              "explanation": "C正确：基类名::Func()可显式调用基类版本。A错误：虚函数非纯虚函数，派生类可不重写。B错误：类型兼容+虚函数后基类指针可调用派生类重写版本。D错误：含纯虚函数(=0)才是抽象类。"
+            }
+          ]
+        },
+        "虚析构函数": {
+          "questions": [
+            {
+              "id": 3, "type": "multiple_choice",
+              "stem": "若以类型兼容的方式，使用派生类的对象初始化了基类的指针，则以下关于虚析构函数的说法正确的是______。",
+              "options": [
+                "A. 若定义虚析构函数，则销毁时先调用派生类的析构函数，再调用基类的析构函数",
+                "B. 若定义虚析构函数，则能够调用到基类的析构函数",
+                "C. 若定义虚析构函数，则能够调用到派生类的析构函数",
+                "D. 若不定义虚析构函数，也能够调用到基类的析构函数",
+                "E. 若不定义虚析构函数，也能够调用到派生类的析构函数"
+              ],
+              "answer": ["A", "B", "C", "D"],
+              "explanation": "有虚析构时：先调派生类析构→再调基类析构（A/B/C正确）。无虚析构时：只调基类析构（D正确），派生类析构不会被调用（E错误）。这就是基类必须定义虚析构函数的原因。"
+            },
+            {
+              "id": 4, "type": "multiple_choice",
+              "stem": "以下程序的输出结果为______。\n（代码：Base有纯虚函数VFunc，Derived重写，main中 Base *bp = new Derived(); bp->VFunc(); delete bp;）",
+              "code": "class Base {\npublic:\n    virtual void VFunc() const = 0;\n    ~Base() { cout << \"DB\" << endl; }\n};\nclass Derived:public Base {\npublic:\n    void VFunc() const override { cout << \"DVFunc\" << endl; }\n    ~Derived() { cout << \"DD\" << endl; }\n};\nint main() {\n    Base *bp = new Derived();\n    bp->VFunc();\n    delete bp;\n    return 0;\n}",
+              "options": [
+                "A. 编译错误", "B. DB\\nDD", "C. DD\\nDB",
+                "D. DVFunc\\nDB", "E. DVFunc\\nDD",
+                "F. DVFunc\\nDB\\nDD", "G. DVFunc\\nDD\\nDB"
+              ],
+              "answer": ["D"],
+              "explanation": "bp->VFunc() 调用Derived::VFunc()→输出DVFunc。delete bp：Base未定义虚析构函数，只调用~Base()→输出DB。Derived::~Derived()未被调用（内存泄漏隐患）。若Base加 virtual ~Base() 则会输出 DVFunc\\nDD\\nDB。"
+            }
+          ]
+        },
+        "纯虚函数与抽象类": {
+          "questions": [
+            {
+              "id": 5, "type": "multiple_choice",
+              "stem": "以下关于纯虚函数的说法正确的是______。",
+              "options": [
+                "A. 含有纯虚函数的基类若实例化为对象，则会调用基类的纯虚函数",
+                "B. 至少含有一个纯虚函数的类称为抽象类",
+                "C. 若原来的虚函数为 virtual void Func(){} 则将其定义为纯虚函数变为 virtual void Func() = 0;",
+                "D. 基类的虚函数体没有意义时适合定义为纯虚函数"
+              ],
+              "answer": ["B", "C", "D"],
+              "explanation": "A错误：抽象类不能实例化。B正确：含纯虚函数=抽象类。C正确：=0是纯虚函数语法。D正确：无意义的虚函数体适合声明为纯虚函数。"
+            },
+            {
+              "id": 6, "type": "multiple_choice",
+              "stem": "若某基类中有 virtual void Func() = 0; 以下说法中正确的是______。",
+              "options": [
+                "A. 因至少有一个纯虚函数，所以该基类是虚基类，不能建立对象，但可以声明指针",
+                "B. 该函数可以通过基类名::Func()的形式调用",
+                "C. 该函数在基类中声明，需要在类外编写具体定义",
+                "D. 该类能够派生出其他类"
+              ],
+              "answer": ["D"],
+              "explanation": "D正确。A错误：是抽象类不是虚基类（概念不同）。B错误：纯虚函数无函数体不能调用。C错误：纯虚函数=0不需要类外定义。抽象类不能建对象但能建指针，可派生其他类。"
+            }
+          ]
+        },
+        "运算符重载": {
+          "questions": [
+            {
+              "id": 6, "type": "multiple_choice",
+              "stem": "以下关于运算符重载的说法错误的是______。",
+              "options": [
+                "A. 运算符重载即 operator符号 作为函数名来重载运算符的功能",
+                "B. 所有运算符重载既能重载为成员函数，又能重载为友元函数",
+                "C. 运算符重载时运算符的优先级和结合性不变",
+                "D. 运算符重载时需要注意运算符的语义",
+                "E. 运算符重载后，运算符的操作数不变"
+              ],
+              "answer": ["B"],
+              "explanation": "题目问错误的是：B错误——并非所有运算符都能重载（如 . 、:: 、?: 等不可重载），且有些只能重载为成员函数（如 =、[]、()、->）。A/C/D/E均正确。"
+            },
+            {
+              "id": 7, "type": "multiple_choice",
+              "stem": "以下关于运算符重载的描述正确的是______。",
+              "options": [
+                "A. 运算符重载就是同一运算符作用于不同数据类型时实现功能相同的操作",
+                "B. 运算符重载就是同一运算符作用于不同数据类型时实现功能相近的操作",
+                "C. 加号运算符既可以重载为成员函数又可以重载为友元函数，但通常重载为友元函数",
+                "D. 加号运算符重载为成员函数时，左值为自身，可以使用 *this 获取相应对象",
+                "E. 自加运算符重载后优先级会提至最高"
+              ],
+              "answer": ["B", "C", "D"],
+              "explanation": "A应改为'功能相近'（B正确）。C/D正确：双目运算符通常重载为友元函数以支持对称性；成员函数版左操作数是*this。E错误：重载不改变优先级。"
+            }
+          ]
+        },
+        "可重载的运算符": {
+          "questions": [
+            {
+              "id": 8, "type": "multiple_choice",
+              "stem": "以下可以重载的运算符是______。",
+              "options": ["A. new[]", "B. .", "C. ?:", "D. @", "E. #", "F. $"],
+              "answer": ["A"],
+              "explanation": "不可重载的运算符：. .* :: ?: sizeof typeid。new[]可以重载（operator new[]）。@#$不是C++运算符。"
+            },
+            {
+              "id": 9, "type": "multiple_choice",
+              "stem": "以下运算符可以重载的是______。",
+              "options": ["A. *", "B. .", "C. .*", "D. ::", "E. ?:", "F. ->", "G. ->*"],
+              "answer": ["A", "F", "G"],
+              "explanation": "可以重载：*（解引用）、->（成员访问）、->*（成员指针访问）。不可重载：. .*（注意.*不可但->*可） :: ?:。"
+            },
+            {
+              "id": 10, "type": "multiple_choice",
+              "stem": "以下运算符可以重载的是______。",
+              "options": ["A. ^", "B. &", "C. &&", "D. ,", "E. !", "F. ~", "G. &="],
+              "answer": ["A", "B", "C", "D", "E", "F", "G"],
+              "explanation": "全部可重载。^（异或）、&（位与/取地址）、&&（逻辑与）、,（逗号）、!（逻辑非）、~（位反）、&=（与等）均为可重载运算符。"
+            },
+            {
+              "id": 11, "type": "multiple_choice",
+              "stem": "以下运算符可重载的是______。",
+              "options": ["A. new", "B. new[]", "C. delete", "D. delete[]", "E. float()", "F. free"],
+              "answer": ["A", "B", "C", "D", "E"],
+              "explanation": "new/delete/new[]/delete[]均可重载。float()是类型转换运算符可重载。free是C语言函数不是运算符，不可重载。"
+            }
+          ]
+        },
+        "运算符重载的方式": {
+          "questions": [
+            {
+              "id": 12, "type": "multiple_choice",
+              "stem": "以下关于运算符重载方式的说法正确的是______。",
+              "options": [
+                "A. 加号运算符可以重载为成员函数",
+                "B. 实数乘向量可以重载为成员函数",
+                "C. 下标运算符可以重载为友元函数",
+                "D. 双目算数运算符更适合重载为成员函数",
+                "E. 单目算数运算符更适合重载为友元函数"
+              ],
+              "answer": ["A"],
+              "explanation": "A正确。B错误：实数乘向量左值是实数非对象，必须用友元。C错误：[]必须重载为成员函数。D/E说反了：双目更适合友元（对称性），单目更适合成员函数。"
+            },
+            {
+              "id": 13, "type": "multiple_choice",
+              "stem": "以下关于运算符重载时的参数类型选择，说法错误的是______。",
+              "options": [
+                "A. 输入输出流运算符的第一个参数类型固定",
+                "B. 参数只读时，不能使用类类型传值",
+                "C. 参数只读时，最好使用常引用的类类型来传值",
+                "D. 若希望通过重载函数内的形参直接修改传入的实参，则必须使用引用类型传值"
+              ],
+              "answer": ["B"],
+              "explanation": "题目问错误的是：B错误——参数只读时可以用类类型传值（只是效率低但语法合法）。A正确：<<和>>第一个参数固定为ostream&/istream&。C正确：常引用高效安全。D正确：改实参必须引用。"
+            },
+            {
+              "id": 14, "type": "multiple_choice",
+              "stem": "以下关于运算符重载函数的返回类型说法错误的是______。",
+              "options": [
+                "A. 结果产生新值时，需要建立一个局部对象并返回",
+                "B. 结果返回原有对象时，要使用引用类型返回",
+                "C. 结果返回原有对象时，不能使用引用类型返回",
+                "D. 关系运算符返回布尔类型"
+              ],
+              "answer": ["C"],
+              "explanation": "题目问错误的是：C错误——返回原有对象时必须用引用返回（避免拷贝构造）。A正确：新值则返回局部对象。B正确。D正确：==、<等返回bool。"
+            },
+            {
+              "id": 15, "type": "multiple_choice",
+              "stem": "若有 friend Complex operator--(const Complex &, int); 则以下说法正确的是______。",
+              "options": [
+                "A. 该片段将后缀自减运算符重载为了友元函数，且无需给定第二个参数的具体值",
+                "B. 该重载方式可行但不推荐，因为自减运算符是单目运算符，适合重载为成员函数",
+                "C. 该重载方式可行，但只能通过显式方式调用",
+                "D. 该重载方式不可行，会出现编译错误"
+              ],
+              "answer": ["A", "B"],
+              "explanation": "A正确：后缀--用友元重载时第二个int参数是占位符，调用时自动传0。B正确：单目运算符推荐重载为成员函数（无需友元）。C错误：可以正常隐式调用。D错误：语法合法。"
+            }
+          ]
+        }
+      }
+    },
+    "c6-泛型编程": {
+      "title": "泛型编程与模板",
+      "topics": {
+        "函数模板": {
+          "questions": [
+            {
+              "id": 1, "type": "true_false",
+              "stem": "若有函数模板 template<class _T1, class _T2> _T2 compose(_T1 x, _T1 y); 则可通过 int i1=5,i2=10; double d; d=compose(i1,i2); 隐式调用，其中 i1,i2 确定 _T1 为 int，d 确定 _T2 为 double。",
+              "answer": ["错误"],
+              "explanation": "实参可以推导模板参数类型，但返回值类型不能推导！必须显式指定：compose<int,double>(i1,i2)。"
+            },
+            {
+              "id": 2, "type": "true_false",
+              "stem": "若有函数模板 template<class _T1, class _T2> _T2 compose(_T1 x, _T1 y); 则无论如何都不能确定 _T2 的类型。",
+              "answer": ["错误"],
+              "explanation": "可以通过显式指定模板参数来确定：compose<int, double>(i1, i2); 即 compose<实参类型, 返回值类型>(实参)。"
+            },
+            {
+              "id": 3, "type": "multiple_choice",
+              "stem": "下列函数模板的声明中，若调用时使用隐式调用，则错误的是______。",
+              "options": [
+                "A. template<class _T> void Func(_T t);",
+                "B. template<class _T1, class _T2> _T1 Func(_T1 x, _T2 y);",
+                "C. template<class _T1, class _T2, class _T3> _T3 Func(_T1 x, _T2 y);",
+                "D. template<class _T1, class _T2, class _T3> void Func(_T1 x, _T2 y, _T3 &z);"
+              ],
+              "answer": ["C"],
+              "explanation": "C错误：_T3仅出现在返回值类型中，无法通过实参隐式推导，必须显式指定。A可推导_T，B可推导_T1（返回类型与参数一致），D可推导所有三个（z是引用参数）。"
+            }
+          ]
+        },
+        "类模板": {
+          "questions": [
+            {
+              "id": 4, "type": "multiple_choice",
+              "stem": "以下关于类模板的说法错误的是______。",
+              "options": [
+                "A. 在类的成员变量类型相似且成员函数逻辑相同时可考虑利用类模板编程",
+                "B. 类模板的实例化过程可分为两步，先实例化为类，再实例化为对象",
+                "C. 模板参数既可以是参数化类型也可以是普通类型，并可带有默认形参",
+                "D. 若模板参数全部带有默认形参，则建立对象时可简写 类模板名 对象名;"
+              ],
+              "answer": ["D"],
+              "explanation": "题目问错误的是：D错误——即使全部参数有默认值，也必须写 类模板名<> 对象名;（尖括号不能省，表示实例化模板类）。A/B/C均正确。"
+            },
+            {
+              "id": 5, "type": "multiple_choice",
+              "stem": "以下类模板的模板参数声明正确的是______。",
+              "options": ["A. template<class _T>", "B. template(typename _T)", "C. class<template _T>", "D. class(template _T)"],
+              "answer": ["A"],
+              "explanation": "类模板声明语法：template<class 类型参数> 或 template<typename 类型参数>。A正确。B括号错，C/D语法完全错误。"
+            },
+            {
+              "id": 6, "type": "multiple_choice",
+              "stem": "若有类模板定义为 template<class _T > class Test{}; 则建立对象的语法正确的是______。",
+              "options": ["A. Test a;", "B. Test a();", "C. Test<> a;", "D. Test<int> a;"],
+              "answer": ["D"],
+              "explanation": "模板参数无默认值时，必须显式指定：Test<int> a;。A/B无法推导类型，C仅在全部参数有默认值时可用。B还会被解析为函数声明。"
+            },
+            {
+              "id": 7, "type": "multiple_choice",
+              "stem": "若有类模板定义为 template<class _T=int> class Test{}; 则建立对象的语法正确的是______。",
+              "options": ["A. Test a;", "B. Test a();", "C. Test<> a;", "D. Test<int> a;"],
+              "answer": ["C", "D"],
+              "explanation": "模板参数有默认值(int)时：Test<> a; 使用默认类型（C正确），Test<int> a; 显式指定（D正确）。A缺少尖括号，B是函数声明陷阱。"
+            },
+            {
+              "id": 8, "type": "multiple_choice",
+              "stem": "关于 template<class T1=int, class T2=float> class A { T1 data1; T2 data2; public: A(T1 d1, T2 d2):data2(d2),data1(d1){} }; 的说法正确的是______。",
+              "options": [
+                "A. 若 T1 和 T2 是类类型，则构造函数调用顺序为 data1→data2→A",
+                "B. 若使用 A<> a; 建立对象，则出现编译错误",
+                "C. 若使用 A a; 建立对象，则出现编译错误",
+                "D. A<> 可以将类模板 A 实例化为类，其中 T1 变为 int，T2 变为 float"
+              ],
+              "answer": ["A", "C", "D"],
+              "explanation": "A正确：初始化顺序看声明顺序（T1在前），非列表顺序。B错误：A<>合法（使用默认参数）。C正确：A a缺少尖括号编译错误。D正确：A<>使用默认T1=int,T2=float。"
+            }
+          ]
+        },
+        "联编": {
+          "questions": [
+            {
+              "id": 8, "type": "fill_blank",
+              "stem": "静态联编是指在______确定同名函数的具体操作对象，动态联编是指在______确定对象所调用的函数。",
+              "answer": ["编译时", "程序运行时"],
+              "explanation": "静态联编（早期绑定）：编译时确定函数调用地址（如重载、模板）。动态联编（晚期绑定）：运行时通过虚函数表确定（虚函数）。"
+            },
+            {
+              "id": 9, "type": "fill_blank",
+              "stem": "动态联编在程序______确定具体调用的函数，具有灵活性______、效率______的特点。静态联编在程序______确定具体调用的函数，具有灵活性______、效率______的特点。",
+              "answer": ["运行中", "较强", "较低", "编译时", "较差", "较高"],
+              "explanation": "动态联编：运行时决定→灵活性强→效率较低（需查虚表）。静态联编：编译时决定→灵活性差→效率较高（直接调用）。"
+            },
+            {
+              "id": 10, "type": "multiple_choice",
+              "stem": "以下属于静态联编的有______。",
+              "options": ["A. 虚函数", "B. 纯虚函数", "C. 函数重载", "D. 运算符重载", "E. 函数模板"],
+              "answer": ["C", "D", "E"],
+              "explanation": "重载、运算符重载、模板均在编译时确定（静态联编）。虚函数和纯虚函数在运行时通过虚表确定（动态联编）。"
+            },
+            {
+              "id": 11, "type": "multiple_choice",
+              "stem": "以下属于动态联编的有______。",
+              "options": ["A. 虚函数", "B. 纯虚函数", "C. 函数重载", "D. 运算符重载", "E. 函数模板"],
+              "answer": ["A", "B"],
+              "explanation": "虚函数和纯虚函数通过虚函数表在运行时确定调用（动态联编）。重载、运算符重载、模板在编译时确定（静态联编）。"
+            },
+            {
+              "id": 12, "type": "multiple_choice",
+              "stem": "下列使用静态联编的是______，其特点为______。",
+              "options": [
+                "A. 函数模板，执行效率高但灵活性差",
+                "B. 虚函数，执行效率高但灵活性差",
+                "C. 纯虚函数，执行效率低但灵活性强",
+                "D. 运算符重载，执行效率低但灵活性强"
+              ],
+              "answer": ["A"],
+              "explanation": "函数模板使用静态联编：编译时实例化→效率高但灵活性差。虚函数/纯虚函数使用动态联编：运行时查虚表→灵活性强但效率较低。"
+            }
+          ]
+        },
+        "STL": {
+          "questions": [
+            {
+              "id": 20, "type": "multiple_choice",
+              "stem": "以下对于C++ STL的描述正确的有______。",
+              "options": [
+                "A. 向量容器是通过类模板实现的",
+                "B. 列表容器是通过类模板实现的",
+                "C. 算法是通过函数模板实现的",
+                "D. 迭代器本质是通过指针实现的"
+              ],
+              "answer": ["A", "B", "C"],
+              "explanation": "D错误：迭代器是抽象概念，通过类模板实现（每种容器有自己的迭代器类），不是简单指针（虽然vector的迭代器可能是指针，但list的迭代器是类对象）。A/B/C正确。"
+            },
+            {
+              "id": 21, "type": "fill_blank",
+              "stem": "若现在需要选择某种顺序容器以支持一种操作，该操作具有经常向头尾插删元素，但不需要在中间插删元素的特点，因此应选择______。（填容器的模板名）",
+              "answer": ["deque"],
+              "explanation": "deque（双端队列）支持头尾高效插删。vector只支持尾端高效操作，list支持任意位置但内存不连续。deque最适合题干描述的场景。"
+            },
+            {
+              "id": 22, "type": "multiple_choice",
+              "stem": "以下标准迭代器的声明正确的是______。",
+              "options": [
+                "A. list<int>::iterator iter;",
+                "B. set<double>(iterator) iter;",
+                "C. deque::iterator iter;",
+                "D. vecter<char> iter;"
+              ],
+              "answer": ["A"],
+              "explanation": "A正确：迭代器声明格式 容器<类型>::iterator。B语法完全错误。C缺少模板参数（应为deque<int>::iterator）。D拼写错误（应为vector）且缺少iterator。"
+            }
+          ]
+        },
+        "RTTI": {
+          "questions": [
+            {
+              "id": 13, "type": "multiple_choice",
+              "stem": "以下关于RTTI（运行时刻类型识别）的描述正确的有______。",
+              "options": [
+                "A. 它允许使用基类指针获取实际所指对象的类型",
+                "B. 它支持从基类指针向派生类指针转换",
+                "C. 若有派生类A的对象构造的基类指针，则这个基类指针可以向派生类A的引用类型转换",
+                "D. 若有派生类A的对象构造的基类指针，则这个基类指针可以向另一个派生类B的引用类型转换",
+                "E. 使用 typeid(对象).name() 获取的字符串中只包含对象所对应的实际类名",
+                "F. RTTI在编译时就确定了相应的结果",
+                "G. 向上类型兼容可直接进行，向下类型兼容需要使用 dynamic_cast 运算符进行"
+              ],
+              "answer": ["A", "B", "C", "G"],
+              "explanation": "D错误：只能转回实际类型A的引用，不能转成B。E错误：返回的字符串还包含编译器特定的修饰符。F错误：RTTI是运行时确定的。A/B/C/G正确。"
+            },
+            {
+              "id": 14, "type": "fill_blank",
+              "stem": "以下代码的运行结果为______。",
+              "code": "#include <iostream>\n#include <typeinfo>\nusing namespace std;\n\nclass Hero{};\nclass Saber : public Hero{};\n\nint main() {\n    Hero* a = new Hero();\n    Hero* b = new Saber();\n    if(typeid(*a).name()==typeid(*b).name())\n        cout << \"Identical \";\n    else\n        cout << \"Different \";\n    if(typeid(a).name()==typeid(b).name())\n        cout << \"Identical\" << endl;\n    else\n        cout << \"Different\" << endl;\n}",
+              "answer": ["Identical Identical"],
+              "explanation": "基类无虚函数时，typeid(*a)和typeid(*b)都在编译时确定为Hero（静态类型），所以第一个输出Identical。typeid(a)和typeid(b)都是Hero*指针类型，也相同，第二个输出Identical。如基类有虚函数，则第一个会是Different。"
+            }
+          ]
+        }
+      }
+    },
+    "c7-流与文件": {
+      "title": "流与文件",
+      "topics": {
+        "打开文件": {
+          "questions": [
+            {
+              "id": 1, "type": "multiple_choice",
+              "stem": "使用 fstream 以追加方式打开二进制文件时使用的参数为______。",
+              "options": [
+                "A. ios::binary",
+                "B. ios::app && ios::binary",
+                "C. ios::app | ios::binary",
+                "D. ios::app || ios::binary"
+              ],
+              "answer": ["C"],
+              "explanation": "打开模式用位或运算符 | 组合：ios::app | ios::binary。&&是逻辑与，||是逻辑或，单独binary只是二进制模式不含追加。"
+            },
+            {
+              "id": 2, "type": "multiple_choice",
+              "stem": "有 fstream stream(\"file.txt\", ios::out); stream << \"test\"; stream.close(); 若程序运行前文件不存在，则以下说法正确的是______。",
+              "options": [
+                "A. 能打开文件，且可以将字符串 test 写入文件",
+                "B. 能打开文件，但不能将字符串 test 写入文件",
+                "C. 不能打开文件，且编译器会报错",
+                "D. 不能打开文件，但编译器不报错"
+              ],
+              "answer": ["A"],
+              "explanation": "ios::out模式：若文件不存在则创建新文件，若存在则清空（trunc）。所以能打开文件并写入test。close()确保缓冲区刷新到磁盘。"
+            },
+            {
+              "id": 3, "type": "multiple_choice",
+              "stem": "有 fstream stream(\"file.txt\", ios::out); stream << \"test\"; （注意：没有 close()）若程序运行前文件不存在，则以下说法正确的是______。",
+              "options": [
+                "A. 能打开文件，且可以将字符串 test 写入文件",
+                "B. 能打开文件，但不能将字符串 test 写入文件",
+                "C. 不能打开文件，且编译器会报错",
+                "D. 不能打开文件，但编译器不报错"
+              ],
+              "answer": ["B"],
+              "explanation": "能打开文件，但没有close()时数据可能留在缓冲区未实际写入磁盘。Windows下尤其明显。不仅不能写入test，而且可能清空文件。Ubuntu可能因析构时自动flush而写入。"
+            }
+          ]
+        },
+        "关闭文件": {
+          "questions": [
+            {
+              "id": 4, "type": "multiple_choice",
+              "stem": "在C++中关闭已打开的文本文件所使用的成员函数是______。",
+              "options": ["A. close()", "B. fclose()", "C. delete", "D. delete[]"],
+              "answer": ["A"],
+              "explanation": "fstream::close() 关闭文件。fclose()是C语言的。delete/delete[]用于释放动态内存，与文件无关。"
+            }
+          ]
+        },
+        "文件操作": {
+          "questions": [
+            {
+              "id": 5, "type": "multiple_choice",
+              "stem": "下列关于文件操作的说法正确的是______。",
+              "options": [
+                "A. 若存储字符，则存储格式为ASCII码",
+                "B. 若存储为二进制文件，则节省空间且保密性较好",
+                "C. 使用 fstream 时，若打开文件时使用 ios::in 作为参数，则等同于使用 ifstream",
+                "D. 二进制文件的输入输出可以利用 operator>> 和 operator<< 实现"
+              ],
+              "answer": ["A", "B", "C", "D"],
+              "explanation": "全正确。A：文本模式存ASCII。B：二进制紧凑且不易直接阅读。C：fstream+ios::in等价于ifstream。D：二进制也可用>>和<<，但通常用read/write更合适。"
+            }
+          ]
+        },
+        "标准流对象": {
+          "questions": [
+            {
+              "id": 6, "type": "fill_blank",
+              "stem": "iostream 库中预定义了一些常用的标准流对象，包括 cin、______、cerr 和 clog。",
+              "answer": ["cout"],
+              "explanation": "四个标准流对象：cin（标准输入）、cout（标准输出）、cerr（标准错误，无缓冲）、clog（标准日志，有缓冲）。"
+            }
+          ]
+        }
+      }
+    },
+    "c4-继承与派生": {
+      "title": "继承与派生",
+      "topics": {
+        "继承与派生的作用": {
+          "questions": [
+            {
+              "id": 1, "type": "multiple_choice",
+              "stem": "以下关于继承与派生的说法正确的是______。",
+              "options": [
+                "A. 继承就是用已有类定义新类，新类称为基类",
+                "B. 继承就是用已有类定义新类，原有类称为派生类",
+                "C. 派生类可以继承基类的属性和行为",
+                "D. 派生类可以添加新的属性和行为",
+                "E. 派生类不能覆盖原有成员",
+                "F. 继承与派生可以分别在不同时刻发生",
+                "G. 继承的最大优点是代码重用，而派生则不具备代码重用的优势"
+              ],
+              "answer": ["C", "D"],
+              "explanation": "继承用已有类定义新类，原有类称基类，新类称派生类。派生类可继承基类属性和行为（代码重用），也可添加新属性和行为（功能扩展），还可覆盖原有成员。继承与派生是同一过程的两个视角。"
+            }
+          ]
+        },
+        "继承的代码实现": {
+          "questions": [
+            {
+              "id": 2, "type": "multiple_choice",
+              "stem": "对于以下代码描述正确的是______。",
+              "code": "class Base1 {};\nclass Base2 {};\nclass Derived : public Base1, public Base2 {\npublic:\n    Derived() : Base2(), Base1() {}\n};",
+              "options": [
+                "A. Derived 类只继承 Base1，而不能继承 Base2",
+                "B. Derived 类继承 Base1 与 Base2 的继承方式必须相同",
+                "C. Base1 与 Base2 的构造函数通过初始化列表调用，顺序依据初始化列表的编写顺序，此处先调用 Base2 的构造函数，再调用 Base1 的构造函数",
+                "D. Base1 与 Base2 的构造函数通过初始化列表调用，顺序依据继承时的声明顺序，此处先调用 Base1 的构造函数，再调用 Base2 的构造函数"
+              ],
+              "answer": ["D"],
+              "explanation": "多重继承时基类构造函数调用顺序取决于继承声明时的顺序，与初始化列表中书写顺序无关。"
+            },
+            {
+              "id": 3, "type": "fill_blank",
+              "stem": "若希望使 Derived 类公有继承 Base 类，则 class Base {}; class Derived : ______ Base {};",
+              "answer": ["public"],
+              "explanation": "公有继承语法：class 派生类 : public 基类 {}。若不写继承方式，class默认private继承，struct默认public继承。"
+            }
+          ]
+        },
+        "继承的方式": {
+          "questions": [
+            {
+              "id": 3, "type": "fill_blank",
+              "stem": "基类中的公有成员通过公有、私有和保护继承，在派生类中分别变为______成员、______成员和______成员。（填公有、私有、保护或不可访问）",
+              "answer": ["公有", "私有", "保护"],
+              "explanation": "公有继承：public→public，protected→protected；私有继承：全部→private；保护继承：public+protected→protected。"
+            },
+            {
+              "id": 4, "type": "fill_blank",
+              "stem": "基类中的保护成员通过公有、私有、保护继承分别在派生类中成为______成员、______成员和______成员。（填公有、私有、保护或不可访问）",
+              "answer": ["保护", "私有", "保护"],
+              "explanation": "保护成员公有继承→保护，私有继承→私有，保护继承→保护。保护成员永远不会变公有。"
+            },
+            {
+              "id": 5, "type": "fill_blank",
+              "stem": "基类中的私有成员通过公有、私有、保护继承，在派生类中成为______成员、______成员和______成员。（填公有、私有、保护或不可访问）",
+              "answer": ["不可访问", "不可访问", "不可访问"],
+              "explanation": "基类私有成员无论何种继承方式在派生类中都不可直接访问，只能通过基类公有或保护接口间接访问。"
+            },
+            {
+              "id": 8, "type": "multiple_choice",
+              "stem": "若通过公有继承，则基类中的公有成员、保护成员和私有成员分别在派生类中为______、______和______成员。",
+              "options": [
+                "A. 公有、保护、私有",
+                "B. 公有、保护、不可访问",
+                "C. 公有、公有、公有"
+              ],
+              "answer": ["B"],
+              "explanation": "公有继承：public→public，protected→protected，private→不可访问。这是最常用的继承方式，保持基类访问权限不变（私有除外）。"
+            },
+            {
+              "id": 9, "type": "multiple_choice",
+              "stem": "若通过保护继承，则基类中的公有成员、保护成员和私有成员分别在派生类中为______、______和______成员。",
+              "options": [
+                "A. 保护、保护、私有",
+                "B. 保护、保护、不可访问",
+                "C. 保护、保护、保护"
+              ],
+              "answer": ["B"],
+              "explanation": "保护继承：public→protected，protected→protected，private→不可访问。保护继承将基类public成员降级为protected。"
+            },
+            {
+              "id": 10, "type": "multiple_choice",
+              "stem": "若通过私有继承，则基类中的公有成员、保护成员和私有成员分别在派生类中为______、______和______成员。",
+              "options": [
+                "A. 私有、私有、私有",
+                "B. 私有、私有、不可访问",
+                "C. 不可访问、不可访问、不可访问"
+              ],
+              "answer": ["B"],
+              "explanation": "私有继承：public→private，protected→private，private→不可访问。私有继承将基类所有可访问成员变为派生类的私有成员。"
+            },
+            {
+              "id": 11, "type": "multiple_choice",
+              "stem": "以下关于保护继承与私有继承的说法正确的有______。",
+              "options": [
+                "A. 保护继承中，基类成员可沿继承树继续传播",
+                "B. 私有继承中，基类成员可沿继承树继续传播",
+                "C. 基类中的公有成员即使通过连续的私有继承，也能在最终派生类中被访问",
+                "D. 基类中的私有成员即使通过连续的保护继承，在最终的派生类中也不能被访问"
+              ],
+              "answer": ["A", "D"],
+              "explanation": "A正确：保护继承保留protected属性，下一层派生类仍可访问。B错误：私有继承后所有基类成员变private，下一层派生类不可访问。C错误：私有继承让基类成员在下一层变private→不可继续传播。D正确：基类private成员始终不可访问，无论继承方式。"
+            }
+          ]
+        },
+        "继承中的构造析构时机": {
+          "questions": [
+            {
+              "id": 6, "type": "fill_blank",
+              "stem": "以下代码的输出结果为（每空一行）：",
+              "code": "#include <iostream>\nusing namespace std;\n\nclass Combination {\n    int data;\npublic:\n    Combination(int data) {\n        this->data = data;\n        cout << \"ConCombination\" << this->data << endl;\n    }\n};\n\nclass Base {\n    Combination c2, c1;\npublic:\n    Base() : c1(3), c2(4) { cout << \"ConBase\" << endl; }\n};\n\nclass Derived : public Base {\n    Combination c2, c1;\npublic:\n    Derived() : c1(1), c2(2), Base() {cout << \"ConDerived\" << endl;}\n};\n\nint main() {\n    Derived d;\n    return 0;\n}",
+              "answer": ["ConCombination4", "ConCombination3", "ConBase", "ConCombination2", "ConCombination1", "ConDerived"],
+              "explanation": "构造顺序：①先基类后派生类；②先组合对象后自身；③初始化列表顺序无关，组合对象按声明顺序，基类按继承声明顺序；④析构完全相反。"
+            },
+            {
+              "id": 7, "type": "multiple_choice",
+              "stem": "以下代码的构造函数调用顺序正确的是______。\nclass Combine {};\nclass Base { Combine cb2, cb1; };\nclass Derived : public Base { Combine cd1, cd2; };",
+              "options": [
+                "A. cd1→cd2→Derived→cb2→cb1→Base",
+                "B. cb2→cb1→Base→cd1→cd2→Derived",
+                "C. cb2→cb1→cd1→cd2→Base→Derived"
+              ],
+              "answer": ["B"],
+              "explanation": "构造顺序：①先基类Base（其组合对象cb2声明在前→cb2→cb1→Base自身）；②再派生类Derived（其组合对象cd1声明在前→cd1→cd2→Derived自身）。整体：cb2→cb1→Base→cd1→cd2→Derived。"
+            }
+          ]
+        },
+        "类型兼容": {
+          "questions": [
+            {
+              "id": 7, "type": "fill_blank",
+              "stem": "写出以下程序的输出结果（每空一行）：",
+              "code": "#include <iostream>\nusing namespace std;\n\nclass A{\npublic:\n    A(){ cout << \"ConA\" << endl; }\n    void Func(){ cout<<\"A\"<<endl; }\n};\n\nclass B{\npublic:\n    B(){ cout << \"ConB\" << endl; }\n};\n\nclass C:public A{\n    B b;\npublic:\n    C():b(), A(){ cout << \"ConC\" << endl; }\n    void Func(){ cout<<\"C\"<<endl; }\n};\n\nint main(){\n    C c;\n    A a1(c); A *a2 = &c; A &a3(c);\n    a1.Func(); a2->Func(); a3.Func();\n    return 0;\n}",
+              "answer": ["ConA", "ConB", "ConC", "A", "A", "A"],
+              "explanation": "构造顺序：A()→B()→C()。类型兼容（公有继承下派生类可当基类用）：a1是A对象用c初始化（拷贝构造，只复制A部分），a2是A*指向c，a3是A&引用c。但未使用虚函数，a1.Func()、a2->Func()、a3.Func()都调用A::Func()输出A。不用虚函数时一定输出A。"
+            },
+            {
+              "id": 8, "type": "multiple_choice",
+              "stem": "以下关于类型兼容的说法正确的是______。",
+              "options": [
+                "A. 只有在公有派生的情况下才可以使用类型兼容",
+                "B. 类型兼容就是用基类对象初始化派生类对象的方法",
+                "C. 类型兼容在任何情况下都只能向上，不能向下",
+                "D. 仅使用类型兼容也可以调用到派生类的函数"
+              ],
+              "answer": ["A"],
+              "explanation": "A正确：只有公有继承才支持类型兼容。B错误：类型兼容是用派生类对象初始化基类对象/指针/引用（向上转型），方向反了。C错误：使用RTTI（dynamic_cast）可以向下转型。D错误：不用虚函数仅靠类型兼容无法调用派生类函数（输出A而非C）。"
+            }
+          ]
+        },
+        "多继承的构造析构": {
+          "questions": [
+            {
+              "id": 8, "type": "multiple_choice",
+              "stem": "若有 class Base1{},Base2{},Base3{}; class Derived:public Base1,Base2,protected Base3{ Derived():Base2(),Base3(),Base1(){} }; 则构造函数调用顺序为______。",
+              "options": [
+                "A. Base3→Base2→Base1→Derived",
+                "B. Base1→Base2→Base3→Derived",
+                "C. Base2→Base3→Base1→Derived",
+                "D. 编译错误"
+              ],
+              "answer": ["B"],
+              "explanation": "基类构造函数调用顺序只取决于继承声明时的顺序（class Derived:public Base1,Base2,protected Base3），与初始化列表顺序完全无关。所以是 Base1→Base2→Base3→Derived。"
+            },
+            {
+              "id": 9, "type": "multiple_choice",
+              "stem": "下列代码（菱形继承，无virtual）建立Derived对象时构造函数调用顺序正确的是______。",
+              "code": "class Comb {};\nclass Base {};\nclass Mid1 : public Base {\n    Comb c1, c2;\npublic:\n    Mid1() : Base(), c1(), c2() {}\n};\nclass Mid2 : public Base {\n    Comb c1, c2;\npublic:\n    Mid2() : c2(), c1(), Base() {}\n};\nclass Derived : public Mid1, public Mid2 {\n    Comb c1, c2;\npublic:\n    Derived() : c2(), c1(), Mid2(), Mid1() {}\n};",
+              "options": [
+                "A. Base→Mid1::c1→Mid1::c2→Mid1→Base→Mid2::c1→Mid2::c2→Mid2→Derived::c1→Derived::c2→Derived",
+                "B. Base→Mid1::c1→Mid1::c2→Mid1→Mid2::c2→Mid2::c1→Mid2→Derived::c2→Derived::c1→Derived",
+                "C. Base→Mid1::c1→Mid1::c2→Mid1→Base→Mid2::c1→Mid2::c2→Mid2→Derived::c1→Derived::c2→Derived",
+                "D. Mid1→Base→Mid1::c1→Mid1::c2→Mid2→Base→Mid2::c1→Mid2::c2→Derived→Derived::c1→Derived::c2",
+                "E. Base→Mid1::c1→Mid1::c2→Mid2::c1→Mid2::c2→Mid1→Mid2→Derived::c1→Derived::c2→Derived",
+                "F. Base→Mid1::c1→Mid1::c2→Mid1→Mid2::c1→Mid2::c2→Mid2→Derived::c2→Derived::c1→Derived",
+                "G. Base→Mid1→Mid2→Derived::c1→Derived::c2→Derived"
+              ],
+              "answer": ["C"],
+              "explanation": "无虚基类时Base被构造两次。顺序：①先基类后自身；②组合对象按声明顺序（与初始化列表顺序无关）；③Mid1声明在Mid2前，先构造Mid1整条链再Mid2；④最终Derived的组合对象c1(声明在前)→c2。关键：初始化列表顺序无关，组合对象看声明顺序。"
+            },
+            {
+              "id": 11, "type": "fill_blank",
+              "stem": "写出以下程序的输出结果（每空一行）：",
+              "code": "#include <iostream>\nusing namespace std;\n\nclass X{\n    int ID;\npublic:\n    X(int ID){\n        this->ID = ID;\n        cout << \"Con\" << this->ID << endl;\n    }\n};\nclass A{\n    X x1, x2;\npublic:\n    A(int ID1, int ID2):x2(ID2), x1(ID1){\n        cout << \"ConA\" << endl;\n    }\n};\nclass B{\n    X x1, x2;\npublic:\n    B(int ID1, int ID2):x1(ID1), x2(ID2){\n        cout << \"ConB\" << endl;\n    }\n};\nclass C:public B, public A{\n    X x1, x2;\npublic:\n    C(int ID1, int ID2, int IDA1, int IDA2, int IDB1, int IDB2):x2(ID2), x1(ID1), A(IDA1, IDA2), B(IDB1, IDB2){\n        cout << \"ConC\" << endl;\n    }\n};\n\nint main(){\n    C c(1,2,3,4,5,6);\n    return 0;\n}",
+              "answer": ["Con5", "Con6", "ConB", "Con3", "Con4", "ConA", "Con1", "Con2", "ConC"],
+              "explanation": "继承声明顺序 class C:public B,public A → 先B后A。B中x1声明在前→Con5(x1)再Con6(x2)→ConB。A中x1声明在前→Con3再Con4→ConA。C中x1声明在前→Con1再Con2→ConC。初始化列表顺序无关。"
+            }
+          ]
+        },
+        "虚基类的构造析构": {
+          "questions": [
+            {
+              "id": 10, "type": "multiple_choice",
+              "stem": "下列代码（菱形继承，使用virtual虚基类）建立Derived对象时构造函数调用顺序正确的是______。",
+              "code": "class Comb {};\nclass Base {};\nclass Mid1 : virtual public Base {\n    Comb c1, c2;\npublic:\n    Mid1() : Base(), c1(), c2() {}\n};\nclass Mid2 : virtual public Base {\n    Comb c1, c2;\npublic:\n    Mid2() : c2(), c1(), Base() {}\n};\nclass Derived : public Mid1, public Mid2 {\n    Comb c1, c2;\npublic:\n    Derived() : c2(), c1(), Mid2(), Mid1() {}\n};",
+              "options": [
+                "A. Base→Mid1::c1→Mid1::c2→Mid1→Mid2::c1→Mid2::c2→Mid2→Derived::c1→Derived::c2→Derived",
+                "B. Base→Mid1::c1→Mid1::c2→Mid1→Mid2::c2→Mid2::c1→Mid2→Derived::c2→Derived::c1→Derived",
+                "C. Base→Mid1::c1→Mid1::c2→Mid1→Base→Mid2::c2→Mid2::c1→Mid2→Derived::c2→Derived::c1→Derived",
+                "D. Mid1→Base→Mid1::c1→Mid1::c2→Mid2→Base→Mid2::c1→Mid2::c2→Derived→Derived::c1→Derived::c2",
+                "E. Base→Mid1::c1→Mid1::c2→Mid2::c1→Mid2::c2→Mid1→Mid2→Derived::c1→Derived::c2→Derived",
+                "F. Base→Mid1::c1→Mid1::c2→Mid1→Mid2::c1→Mid2::c2→Mid2→Derived::c2→Derived::c1→Derived",
+                "G. Base→Mid1→Mid2→Derived::c1→Derived::c2→Derived"
+              ],
+              "answer": ["A"],
+              "explanation": "使用虚基类后Base只被构造一次（由最终派生类Derived负责），且在所有非虚基类之前构造。后续与普通继承相同：Mid1先声明→先Mid1链；组合对象按声明顺序。与上题核心区别：Base只出现一次。"
+            }
+          ]
+        },
+        "继承中的二义性问题": {
+          "questions": [
+            {
+              "id": 13, "type": "multiple_choice",
+              "stem": "以下代码中的二义性问题可以用______的方法解决。\nclass Base1 { protected: int data; };\nclass Base2 { protected: int data; };\nclass Derived:public Base1, public Base2 {\n    Derived() : Base1(), Base2() { cout << this->data << endl; }\n};",
+              "options": ["A. 虚基类", "B. 成员重定义", "C. 不存在二义性问题"],
+              "answer": ["B"],
+              "explanation": "这是直接二义性：Derived直接从Base1和Base2继承同名的data。虚基类只解决间接二义性（菱形继承）。此处应在Derived中重定义data或用Base1::data/Base2::data指明。"
+            },
+            {
+              "id": 14, "type": "multiple_choice",
+              "stem": "以下代码中的二义性问题可通过______的方式解决。\nclass Base0 { protected: int data; };\nclass Base1 : public Base0 {};\nclass Base2 : public Base0 {};\nclass Derived:public Base1, public Base2 {\n    Derived() : Base1(), Base2() { cout << this->data << endl; }\n};",
+              "options": ["A. 虚基类", "B. 成员重定义", "C. 不存在二义性问题"],
+              "answer": ["A", "B"],
+              "explanation": "这是间接二义性（菱形继承），data从Base0通过两条路径到达Derived。可用虚基类（Base0只继承一次）或成员重定义解决。两种方法均可。"
+            },
+            {
+              "id": 15, "type": "multiple_choice",
+              "stem": "以下关于虚基类的说法正确的是______。",
+              "options": [
+                "A. 在任何一个派生类对象的完整构造过程中，其虚基类的构造函数只会被调用一次",
+                "B. 虚基类不能构造对象",
+                "C. 虚基类的构造函数由最（终）派生类负责初始化",
+                "D. 虚基类可以解决任意二义性问题"
+              ],
+              "answer": ["A", "C"],
+              "explanation": "A/C正确：虚基类只构造一次，由最终派生类负责。B错误：虚基类可以构造对象。D错误：虚基类只解决间接二义性（菱形继承），不解决直接二义性。"
+            },
+            {
+              "id": 16, "type": "multiple_choice",
+              "stem": "使用虚基类解决菱形继承的间接二义性时，需要做的事情是______。",
+              "options": [
+                "A. 继承虚基类时添加 virtual",
+                "B. 虚基类的函数前添加 virtual",
+                "C. 最派生类负责调用虚基类的构造函数"
+              ],
+              "answer": ["A", "C"],
+              "explanation": "两步：①中间类继承时加virtual（class Mid:virtual public Base）；②最终派生类在初始化列表中直接调用虚基类构造函数。B错误：virtual关键字加在继承处，不是函数前。"
+            },
+            {
+              "id": 12, "type": "multiple_choice",
+              "stem": "关于以下代码的说法正确的是______。",
+              "code": "class Comb {};\nclass Base {\nprotected:\n    int data;\n};\nclass Mid1 : public Base {\n    Comb c1, c2;\npublic:\n    Mid1() : Base(), c1(), c2() {}\n};\nclass Mid2 : public Base {\n    Comb c1, c2;\npublic:\n    Mid2() : c2(), c1(), Base() {}\n};\nclass Derived : public Mid1, public Mid2 {\n    Comb c1, c2;\npublic:\n    Derived() : c2(), c1(), Mid2(), Mid1() {\n        this->data = 0;\n    }\n};",
+              "options": [
+                "A. 由于 Derived 类分别从 Mid1 和 Mid2 类继承了 data 成员，即使构造函数中没有调用 data 成员，也会发生二义性编译错误",
+                "B. 由于 Derived 类分别从 Mid1 和 Mid2 类继承了 data 成员，且调用了 data 成员，因此会发生二义性编译错误",
+                "C. 这种二义性属于直接二义性",
+                "D. 这种二义性属于间接二义性",
+                "E. 这段代码不会产生二义性问题",
+                "F. 这段代码中的错误可以用虚基类解决",
+                "G. 这段代码中的错误可以用成员重定义解决"
+              ],
+              "answer": ["B", "D", "F", "G"],
+              "explanation": "B正确：派生类通过两条路径（Mid1和Mid2）都继承了Base::data，this->data产生二义性。D正确：这是间接二义性（共同基类成员通过不同路径继承）。F正确：虚基类使Base只继承一次。G正确：在Derived中重定义data可覆盖。A错误：不实际调用不会报编译错。E错误：确实有二义性。"
+            },
+            {
+              "id": 13, "type": "multiple_choice",
+              "stem": "关于以下代码的说法正确的是______。",
+              "code": "class Comb {};\nclass Base {\nprotected:\n    int data;\npublic:\n    Base(int data) { this->data = data; }\n};\nclass Mid1 : virtual public Base {\n    Comb c1, c2;\npublic:\n    Mid1() : Base(0), c1(), c2() {}\n};\nclass Mid2 : virtual public Base {\n    Comb c1, c2;\npublic:\n    Mid2() : c2(), c1(), Base(0) {}\n};\nclass Derived : public Mid1, public Mid2 {\n    Comb c1, c2;\npublic:\n    Derived() : c2(), c1(), Mid2(), Mid1() {\n        this->data = 0;\n    }\n};",
+              "options": [
+                "A. 这段代码会出现编译错误",
+                "B. 这段代码可以正常编译通过",
+                "C. 由于定义了虚基类，这段代码解决了二义性问题，但未能合理构造 Base 类的相关成员，因此不能通过编译",
+                "D. 由于定义了虚基类，这段代码解决了二义性问题，且 Base 类的构造函数在 Mid1 类和 Mid2 类中被合理调用，因此可以通过编译"
+              ],
+              "answer": ["A", "C"],
+              "explanation": "使用虚基类后Base由最终派生类Derived负责构造。但Derived的初始化列表中没有调用Base的构造函数，而Base又没有默认构造函数（只有Base(int)），因此编译错误。需要在Derived()初始化列表中加上Base(xxx)。"
+            },
+            {
+              "id": 14, "type": "multiple_choice",
+              "stem": "以下关于二义性和虚基类的说法正确的是______。",
+              "options": [
+                "A. 二义性问题就是从多个基类继承了同名成员导致的问题",
+                "B. 二义性问题分为间接二义性和直接二义性",
+                "C. 成员函数和成员变量都有可能导致二义性问题",
+                "D. 成员重定义可以解决二义性问题",
+                "E. 不调用具有二义性的成员就不会产生二义性问题"
+              ],
+              "answer": ["A", "B", "C", "D", "E"],
+              "explanation": "全正确。A：二义性本质就是同名成员冲突。B：直接二义性（一个派生类直接从多个基类继承同名成员）和间接二义性（菱形继承中共同基类成员通过不同路径到达）。C：函数和变量都可能导致。D：在派生类中重定义可隐藏基类版本。E：不调用就不会触发编译错误（潜在二义性可存在）。"
+            },
+            {
+              "id": 15, "type": "multiple_choice",
+              "stem": "以下关于二义性和虚基类的说法错误的是______。",
+              "options": [
+                "A. 当代码具有潜在的间接二义性时，即使不调用具有二义性的成员也效率低下，因为会调用两次共同基类的构造函数",
+                "B. 虚基类的关键字是 virtual",
+                "C. 定义虚基类需要两步操作：将共同基类定义为虚基类；在最终派生类的初始化列表中也调用虚基类的构造函数",
+                "D. 虚基类的构造函数仅调用一次",
+                "E. 使用虚基类能解决间接和直接二义性问题"
+              ],
+              "answer": ["E"],
+              "explanation": "E错误：虚基类只解决间接二义性（菱形继承中的重复基类），不能解决直接二义性（从不同基类直接继承同名成员）。A正确：无虚基类时共同基类被构造两次。B/C/D均正确。"
+            },
+            {
+              "id": 16, "type": "fill_blank",
+              "stem": "写出以下程序的输出（每空一行）：",
+              "code": "#include <iostream>\nusing namespace std;\n\nclass Base{\n    int data;\npublic:\n    Base(int data){\n        this->data = data;\n        cout << \"ConB\" << endl;\n    }\n};\nclass BLeft:virtual public Base{\npublic:\n    BLeft(int data):Base(data){\n        cout << \"ConBL\" << endl;\n    }\n};\nclass BRight:virtual public Base{\npublic:\n    BRight(int data):Base(data){\n        cout << \"ConBR\" << endl;\n    }\n};\nclass Derived:public BRight, public BLeft{\npublic:\n    Derived(int data):BLeft(data), BRight(data), Base(data){\n        cout << \"ConD\" << endl;\n    }\n};\n\nint main(){\n    Derived d(0);\n    return 0;\n}",
+              "answer": ["ConB", "ConBR", "ConBL", "ConD"],
+              "explanation": "虚基类Base由Derived直接构造→先ConB。继承声明顺序class Derived:public BRight,public BLeft→先BRight再BLeft→ConBR→ConBL。最后Derived自身→ConD。虚基类下Base只构造一次。"
+            },
+            {
+              "id": 17, "type": "fill_blank",
+              "stem": "写出以下程序的输出（每空一行）：",
+              "code": "#include <iostream>\nusing namespace std;\n\nclass Base{\n    int data;\npublic:\n    Base(int data){\n        this->data = data;\n        cout << \"ConB\" << endl;\n    }\n};\nclass BLeft:public Base{\npublic:\n    BLeft(int data):Base(data){\n        cout << \"ConBL\" << endl;\n    }\n};\nclass BRight:public Base{\npublic:\n    BRight(int data):Base(data){\n        cout << \"ConBR\" << endl;\n    }\n};\nclass Derived:public BRight, public BLeft{\npublic:\n    Derived(int data):BLeft(data), BRight(data){\n        cout << \"ConD\" << endl;\n    }\n};\n\nint main(){\n    Derived d(0);\n    return 0;\n}",
+              "answer": ["ConB", "ConBR", "ConB", "ConBL", "ConD"],
+              "explanation": "无虚基类→Base被构造两次。继承声明顺序class Derived:public BRight,public BLeft→先BRight链路：Base→ConB, BRight→ConBR；再BLeft链路：Base→ConB, BLeft→ConBL；最后Derived自身→ConD。对比上题：虚基类只一次ConB。"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

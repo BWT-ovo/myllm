@@ -1,0 +1,9 @@
+{
+  "name": "myllm",
+  "version": "1.0.0",
+  "description": "C++面向对象程序设计 - 个性化学习资源智能体系统",
+  "scripts": {
+    "build": "cd frontend && npm install && npm run build",
+    "dev": "cd frontend && npm run dev"
+  }
+}
