@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import { Card, Typography, Button, Tag, Space, Progress, Row, Col, Timeline, Statistic, Empty, Steps, message } from 'antd';
+import { Card, Typography, Button, Tag, Space, Progress, Row, Col, Statistic, Empty, Switch, message } from 'antd';
 import { ThunderboltOutlined, TrophyOutlined, ClockCircleOutlined, CheckCircleOutlined, PlayCircleOutlined } from '@ant-design/icons';
 import { getProfile, getAssessments } from '../api/storage';
 
@@ -40,6 +40,7 @@ const RESOURCE_LABELS: Record<string, string> = {
 
 export default function LearningPath() {
   const [plan, setPlan] = useState<Array<{ key: string; title: string; accuracy: number; hours: number; status: string; week: number; resources: string[] }> | null>(null);
+  const [masteredSet, setMasteredSet] = useState<Set<string>>(new Set());
 
   const profile = useMemo(getProfile, []);
   const assessments = useMemo(getAssessments, []);
@@ -92,7 +93,8 @@ export default function LearningPath() {
       else if (hasData && acc < 60) hours = hours * 1.3; // weak: extra time
 
       let status = 'pending';
-      if (hasData && acc >= 80) status = 'mastered';
+      if (masteredSet.has(key)) status = 'mastered';
+      else if (hasData && acc >= 80) status = 'mastered';
       else if (hasData && acc >= 60) status = 'in_progress';
       else if (hasData) status = 'weak';
 
@@ -116,7 +118,7 @@ export default function LearningPath() {
 
   const totalHours = plan ? Math.round(plan.reduce((s, p) => s + p.hours, 0) * 10) / 10 : 0;
   const totalWeeks = plan ? Math.max(...plan.map((p) => p.week)) : 0;
-  const mastered = plan ? plan.filter((p) => p.status === 'mastered').length : 0;
+  const mastered = plan ? plan.filter((p) => p.status === 'mastered' || masteredSet.has(p.key)).length : 0;
   const completed = assessments.filter((a) => a.sessionId).length > 0;
 
   return (
@@ -156,37 +158,49 @@ export default function LearningPath() {
             return (
               <Card key={week} title={<Space>📅 第 {week} 周 <Tag color="blue">{weekHours} 小时</Tag></Space>}
                 style={{ marginBottom: 16 }}>
-                {weekItems.map((item) => (
-                  <div key={item.key} style={{
-                    display: 'flex', alignItems: 'center', gap: 16, padding: '10px 0',
-                    borderBottom: '1px solid #f0f0f0',
-                  }}>
-                    <div style={{ minWidth: 140 }}>
-                      <Text strong>{item.title}</Text>
-                      <div>
-                        <Tag color={
-                          item.status === 'mastered' ? 'success' :
-                          item.status === 'weak' ? 'error' : 'processing'
-                        }>
-                          {item.status === 'mastered' ? '已掌握' : item.status === 'weak' ? '薄弱' : '进行中'}
-                        </Tag>
+                {weekItems.map((item) => {
+                  const isMastered = masteredSet.has(item.key);
+                  return (
+                    <div key={item.key} style={{
+                      display: 'flex', alignItems: 'center', gap: 16, padding: '10px 0',
+                      borderBottom: '1px solid #f0f0f0',
+                      opacity: isMastered ? 0.5 : 1,
+                    }}>
+                      <div style={{ minWidth: 140 }}>
+                        <Text strong delete={isMastered}>{item.title}</Text>
+                        <div>
+                          <Tag color={
+                            item.status === 'mastered' ? 'success' :
+                            item.status === 'weak' ? 'error' : 'processing'
+                          }>
+                            {item.status === 'mastered' ? '已掌握' : item.status === 'weak' ? '薄弱' : '进行中'}
+                          </Tag>
+                        </div>
+                      </div>
+                      <Progress
+                        percent={item.accuracy}
+                        size="small"
+                        style={{ width: 100 }}
+                        strokeColor={isMastered ? '#52c41a' : item.accuracy >= 80 ? '#52c41a' : item.accuracy >= 60 ? '#faad14' : '#ff4d4f'}
+                        format={() => `${item.accuracy}%`}
+                      />
+                      <Text type="secondary" style={{ minWidth: 60 }}>{item.hours}h</Text>
+                      <Space size={4}>
+                        {item.resources.map((r) => (
+                          <Tag key={r} style={{ fontSize: 11 }}>{RESOURCE_LABELS[r] || r}</Tag>
+                        ))}
+                      </Space>
+                      <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 8 }}>
+                        <Text type="secondary" style={{ fontSize: 12 }}>已掌握</Text>
+                        <Switch size="small" checked={isMastered} onChange={(v) => {
+                          const next = new Set(masteredSet);
+                          v ? next.add(item.key) : next.delete(item.key);
+                          setMasteredSet(next);
+                        }} />
                       </div>
                     </div>
-                    <Progress
-                      percent={item.accuracy}
-                      size="small"
-                      style={{ width: 100 }}
-                      strokeColor={item.accuracy >= 80 ? '#52c41a' : item.accuracy >= 60 ? '#faad14' : '#ff4d4f'}
-                      format={() => `${item.accuracy}%`}
-                    />
-                    <Text type="secondary" style={{ minWidth: 60 }}>{item.hours}h</Text>
-                    <Space size={4}>
-                      {item.resources.map((r) => (
-                        <Tag key={r} style={{ fontSize: 11 }}>{RESOURCE_LABELS[r] || r}</Tag>
-                      ))}
-                    </Space>
-                  </div>
-                ))}
+                  );
+                })}
               </Card>
             );
           })}
