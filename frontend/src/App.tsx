@@ -16,6 +16,7 @@ const TutoringPage = lazy(() => import('./pages/TutoringPage'));
 const AssessmentPage = lazy(() => import('./pages/AssessmentPage'));
 const AnalyticsPage = lazy(() => import('./pages/AnalyticsPage'));
 const QuestionBank = lazy(() => import('./pages/QuestionBank'));
+const LearningPath = lazy(() => import('./pages/LearningPath'));
 const AdminPage = lazy(() => import('./pages/AdminPage'));
 
 function Loading() {
@@ -58,6 +59,7 @@ export default function App() {
           <Route path="/assessments" element={<AssessmentPage />} />
           <Route path="/analytics" element={<AnalyticsPage />} />
           <Route path="/question-bank" element={<QuestionBank />} />
+          <Route path="/learning-path" element={<LearningPath />} />
           <Route path="/admin" element={<AdminPage />} />
         </Route>
 
