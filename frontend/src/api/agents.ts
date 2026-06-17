@@ -13,14 +13,12 @@ import { getProfile, saveProfile, type Profile } from './storage';
 
 // ==================== 画像构建 Agent ====================
 
+// 精简为4轮有效问题，每轮收集1-2个维度
 const QUESTION_FLOW = [
-  { dim: 'knowledge_base', question: '请告诉我你的专业、年级，学过哪些编程语言（如C、Python等），对C++和面向对象编程有多少了解？' },
-  { dim: 'cognitive_style', question: '学习新知识时你喜欢哪种方式？看视频、读文档、动手写代码、还是听课？' },
-  { dim: 'format_preferences', question: '你更喜欢哪种学习材料？课程文档、思维导图、练习题、视频动画、还是代码案例？' },
-  { dim: 'error_patterns', question: '哪些类型的题目你比较容易出错？语法细节、内存管理、面向对象设计、还是指针引用？' },
-  { dim: 'learning_pace', question: '你的学习节奏怎样？快速浏览抓重点，还是按部就班深入？' },
-  { dim: 'motivation_profile', question: '学习C++的主要动力是什么？找工作、做项目、竞赛、还是学业要求？' },
-  { dim: 'complexity_preference', question: '希望内容难度？入门科普、标准大学课程、还是进阶研究？' },
+  { dim: 'knowledge_base', question: '请简单介绍你的学习背景：专业、年级、学过哪些编程语言？对C++了解多少？' },
+  { dim: 'cognitive_style', question: '你平时喜欢怎么学新知识？看视频、读文档、还是动手写代码？更喜欢哪种学习材料？' },
+  { dim: 'error_patterns', question: '之前学编程时，哪些方面容易出错或觉得难？语法细节、指针内存、面向对象设计、还是算法逻辑？你的学习节奏是偏快还是偏慢？' },
+  { dim: 'motivation_profile', question: '你学C++主要是为了什么？找工作、做项目、应付考试、还是兴趣？希望内容简单入门还是深入进阶？' },
 ];
 
 function extractFromMessage(msg: string, dim: string, profile: Profile) {
@@ -95,30 +93,61 @@ export async function profilerChat(
   history: Array<{ role: string; content: string }>
 ): Promise<{ reply: string; completion: number; stage: string }> {
   const profile = getProfile();
-  const oldComp = calcCompletion(profile);
-  const idx = Math.min(Math.round(oldComp * 7), QUESTION_FLOW.length - 1);
 
-  // Extract keywords from user message for current dimension
-  extractFromMessage(message, QUESTION_FLOW[idx].dim, profile);
+  // Extract info from user message for ALL dimensions
+  for (const q of QUESTION_FLOW) {
+    extractFromMessage(message, q.dim, profile);
+  }
+  // Also try the non-question-flow dimensions
+  extractFromMessage(message, 'format_preferences', profile);
+  extractFromMessage(message, 'learning_pace', profile);
+  extractFromMessage(message, 'complexity_preference', profile);
 
-  // Force-fill current dimension if keyword extraction failed
-  forceFillDimension(QUESTION_FLOW[idx].dim, profile);
-
-  // Recalculate — always advances at least 1 dimension per turn
-  const rawComp = calcCompletion(profile);
-  const newComp = Math.min(1, Math.max(oldComp + (1 / 7), rawComp));
+  // Calculate completion based ONLY on actually extracted data (no auto-fill)
+  const newComp = calcCompletion(profile);
   profile.profile_completion = newComp;
   profile.conversation_history = [
     ...(profile.conversation_history || []).slice(-20),
     { role: 'user', content: message.slice(0, 200) },
   ];
 
-  // Next question
-  const nextIdx = Math.min(Math.round(newComp * 7), QUESTION_FLOW.length - 1);
-  const allDims = QUESTION_FLOW.map((q) => q.dim);
-  const completedDims = allDims.slice(0, nextIdx);
+  // Find which dimensions are still missing or weak
+  const getDimScore = (dim: string) => {
+    if (dim === 'knowledge_base') return Object.keys(profile.knowledge_base).length > 0 ? 1 : 0;
+    if (dim === 'cognitive_style') return Object.values(profile.cognitive_style).some((v) => v > 0.5) ? 1 : 0;
+    if (dim === 'format_preferences') return (profile.format_preferences?.preferred_types || []).length > 0 ? 1 : 0;
+    if (dim === 'error_patterns') return profile.error_patterns.length > 0 ? 1 : 0;
+    if (dim === 'learning_pace') return profile.learning_pace > 0 ? 1 : 0;
+    if (dim === 'motivation_profile') return Object.keys(profile.motivation_profile).length > 0 ? 1 : 0;
+    if (dim === 'complexity_preference') return 1;
+    return 0;
+  };
 
-  const prompt = `你是myLLM的学习画像构建助手。已了解: ${completedDims.join('、') || '无'}。当前引导学生回答: ${QUESTION_FLOW[nextIdx].question}。请根据学生回复给2-3句友好回应然后自然提问。只输出纯文字。`;
+  const allDims = ['knowledge_base', 'cognitive_style', 'format_preferences', 'error_patterns', 'learning_pace', 'motivation_profile', 'complexity_preference'];
+  const missing = allDims.filter((d) => getDimScore(d) === 0);
+  const completed = allDims.filter((d) => getDimScore(d) === 1);
+
+  // Build prompt based on what's still missing
+  let nextQuestion = '';
+  if (missing.length === 0) {
+    nextQuestion = '画像已完整，请对学生说一些鼓励的话，并总结他的学习特点。';
+  } else if (missing.includes('knowledge_base')) {
+    nextQuestion = '请先了解学生的学习背景：专业、年级、学过什么语言、对C++了解多少？';
+  } else if (missing.includes('cognitive_style') || missing.includes('format_preferences')) {
+    nextQuestion = '请了解学生喜欢的学习方式（看视频/读文档/写代码）和偏好的学习材料类型（文档/思维导图/练习题/视频/代码案例）。';
+  } else if (missing.includes('error_patterns') || missing.includes('learning_pace')) {
+    nextQuestion = '请了解学生容易出错的方面（语法/指针/面向对象/算法）和学习节奏（快/中/慢）。';
+  } else if (missing.includes('motivation_profile') || missing.includes('complexity_preference')) {
+    nextQuestion = '请了解学生的学习动机（就业/科研/兴趣/考试）和难度偏好（入门/标准/进阶）。';
+  }
+
+  const prompt = `你是myLLM的学习画像构建助手。
+已了解: ${completed.join('、') || '无'}
+还需了解: ${missing.join('、') || '无'}
+
+${nextQuestion}
+请根据学生回复给2-3句友好回应，然后自然地问下一个需要了解的问题。如果画像已完整，就总结学生的特点并祝贺。只输出纯文字。`;
+
   const llmMessages: Array<{ role: 'system' | 'user' | 'assistant'; content: string }> = [
     { role: 'system', content: prompt },
     ...history.slice(-4).map((h) => ({ role: h.role as 'user' | 'assistant', content: h.content })),
@@ -130,7 +159,9 @@ export async function profilerChat(
     reply = await sparkChat(llmMessages, { temperature: 0.7, maxTokens: 400 });
     reply = reply.replace(/```[\s\S]*?```/g, '').replace(/[*#`]/g, '').replace(/\n{3,}/g, '\n\n').trim();
   } catch {
-    reply = `谢谢分享！${QUESTION_FLOW[nextIdx].question}`;
+    reply = missing.length === 0
+      ? '画像已完整！根据你的回答，我已经了解了你的学习特点。你可以前往学习中心开始个性化学习了。'
+      : `谢谢分享！接下来我想了解：${missing[0] || '更多关于你的学习情况'}。`;
   }
 
   profile.conversation_history.push({ role: 'assistant', content: reply.slice(0, 200) });

@@ -1,8 +1,8 @@
-import { useState, useMemo } from 'react';
-import { Card, Typography, Button, Space, Progress, Row, Col, Spin, Empty, Tag } from 'antd';
-import { UserOutlined } from '@ant-design/icons';
+import { useState, useEffect } from 'react';
+import { Card, Typography, Button, Space, Progress, Row, Col, Spin, Empty, Tag, Popconfirm } from 'antd';
+import { UserOutlined, ReloadOutlined } from '@ant-design/icons';
 import ProfileWizard from '../components/profile/ProfileWizard';
-import { getProfile } from '../api/storage';
+import { getProfile, resetProfile } from '../api/storage';
 
 const { Title, Text } = Typography;
 
@@ -18,8 +18,20 @@ const DIMENSIONS = [
 
 export default function ProfilePage() {
   const [wizardStarted, setWizardStarted] = useState(false);
-  const [refreshKey, setRefreshKey] = useState(0);
-  const profile = useMemo(() => { void refreshKey; return getProfile(); }, [refreshKey]);
+  const [profile, setProfile] = useState(getProfile);
+
+  const refreshProfile = () => setProfile(getProfile());
+
+  useEffect(() => {
+    const refresh = () => setProfile(getProfile());
+    refresh();
+    window.addEventListener('focus', refresh);
+    document.addEventListener('visibilitychange', refresh);
+    return () => {
+      window.removeEventListener('focus', refresh);
+      document.removeEventListener('visibilitychange', refresh);
+    };
+  }, []);
 
   const completion = Math.round((profile.profile_completion || 0) * 100);
   const hasProfile = completion > 0;
@@ -35,14 +47,17 @@ export default function ProfilePage() {
     return (profile.confidence_scores || {})[key] ? Math.round(((profile.confidence_scores || {})[key] || 0) * 100) : 0;
   };
 
-  if (wizardStarted) return <ProfileWizard onComplete={() => { setWizardStarted(false); setRefreshKey((k) => k + 1); }} />;
+  if (wizardStarted) return <ProfileWizard onComplete={() => { setWizardStarted(false); refreshProfile(); }} />;
 
   return (
     <div>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
         <div><Title level={3} style={{ margin: 0 }}>学习画像</Title><Text type="secondary">对话式构建你的7维学习画像</Text></div>
         {hasProfile && <Space><Tag color="blue">完成度 {completion}%</Tag>
-          <Button type="primary" ghost onClick={() => setWizardStarted(true)}>继续完善</Button></Space>}
+          <Button type="primary" ghost onClick={() => setWizardStarted(true)}>继续完善</Button>
+          <Popconfirm title="重新构建将清除当前画像，确定？" onConfirm={() => { resetProfile(); refreshProfile(); setWizardStarted(true); }}>
+            <Button icon={<ReloadOutlined />}>重新构建</Button>
+          </Popconfirm></Space>}
       </div>
       <Row gutter={[16, 16]} style={{ marginTop: 16 }}>
         <Col xs={24} lg={16}>
@@ -65,8 +80,15 @@ export default function ProfilePage() {
           <Card>
             <Title level={4}>{hasProfile ? '继续完善' : '开始构建'}</Title>
             <Text type="secondary">{hasProfile ? `当前完成度 ${completion}%。继续对话提升精度。` : '5-10轮对话，AI分析你的学习特点，构建7维画像。'}</Text>
-            <Button type="primary" size="large" block style={{ marginTop: 24 }} icon={<UserOutlined />}
-              onClick={() => setWizardStarted(true)}>{hasProfile ? '继续对话' : '开始对话'}</Button>
+            <Space direction="vertical" style={{ width: '100%', marginTop: 24 }}>
+              <Button type="primary" size="large" block icon={<UserOutlined />}
+                onClick={() => { if (!hasProfile) resetProfile(); setWizardStarted(true); }}>{hasProfile ? '继续对话' : '开始对话'}</Button>
+              {hasProfile && (
+                <Popconfirm title="重新构建将清除当前画像，确定？" onConfirm={() => { resetProfile(); refreshProfile(); setWizardStarted(true); }}>
+                  <Button block icon={<ReloadOutlined />}>重新构建画像</Button>
+                </Popconfirm>
+              )}
+            </Space>
           </Card>
         </Col>
       </Row>

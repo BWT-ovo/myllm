@@ -17,7 +17,10 @@ export default function ProfileWizard({ onComplete }: Props) {
   const [messages, setMessages] = useState<Message[]>([WELCOME]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
-  const [completion, setCompletion] = useState(0);
+  const [completion, setCompletion] = useState(() => {
+    const p = getProfile();
+    return p.profile_completion || 0;
+  });
   const [done, setDone] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 

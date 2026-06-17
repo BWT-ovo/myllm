@@ -61,6 +61,9 @@ export function getProfile(): Profile {
 export function saveProfile(p: Profile) {
   localStorage.setItem(KEYS.profile, JSON.stringify(p));
 }
+export function resetProfile() {
+  localStorage.setItem(KEYS.profile, JSON.stringify({ ...DEFAULT_PROFILE, profile_completion: 0 }));
+}
 
 // ==================== 资源 ====================
 export interface Resource {

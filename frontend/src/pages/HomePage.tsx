@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useEffect, useState } from 'react';
 import { Card, Row, Col, Typography, Statistic, Progress, Button, Space } from 'antd';
 import { BookOutlined, ClockCircleOutlined, ThunderboltOutlined, RightOutlined, UserOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
@@ -8,10 +8,27 @@ const { Title, Text } = Typography;
 
 export default function HomePage() {
   const navigate = useNavigate();
-  const profile = useMemo(getProfile, []);
-  const resources = useMemo(getResources, []);
-  const mastered = useMemo(getMasteredTopics, []);
-  const hours = useMemo(getLearningHours, []);
+  const [profile, setProfile] = useState(getProfile);
+  const [resources, setResources] = useState(getResources);
+  const [mastered, setMastered] = useState(getMasteredTopics);
+  const [hours, setHours] = useState(getLearningHours);
+
+  useEffect(() => {
+    const refresh = () => {
+      setProfile(getProfile());
+      setResources(getResources());
+      setMastered(getMasteredTopics());
+      setHours(getLearningHours());
+    };
+    refresh(); // initial load
+    window.addEventListener('focus', refresh);
+    document.addEventListener('visibilitychange', refresh);
+    return () => {
+      window.removeEventListener('focus', refresh);
+      document.removeEventListener('visibilitychange', refresh);
+    };
+  }, []);
+
   const completion = Math.round((profile.profile_completion || 0) * 100);
 
   return (
