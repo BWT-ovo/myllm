@@ -138,3 +138,27 @@ export function addAssessment(a: Assessment) {
   list.unshift(a);
   localStorage.setItem(KEYS.assessments, JSON.stringify(list));
 }
+
+// ==================== 学习进度 ====================
+export function getMasteredTopics(): string[] {
+  const raw = localStorage.getItem('myllm_mastered');
+  return raw ? JSON.parse(raw) : [];
+}
+export function setMasteredTopics(topics: string[]) {
+  localStorage.setItem('myllm_mastered', JSON.stringify(topics));
+}
+export function getLearningHours(): number {
+  return parseFloat(localStorage.getItem('myllm_hours') || '0');
+}
+export function setLearningHours(hours: number) {
+  localStorage.setItem('myllm_hours', hours.toString());
+}
+
+// ==================== 学习计划 ====================
+export function getSavedPlan(): any | null {
+  const raw = localStorage.getItem('myllm_plan');
+  return raw ? JSON.parse(raw) : null;
+}
+export function setSavedPlan(plan: any) {
+  localStorage.setItem('myllm_plan', JSON.stringify(plan));
+}

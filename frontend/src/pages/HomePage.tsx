@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { Card, Row, Col, Typography, Statistic, Progress, Button, Space } from 'antd';
 import { BookOutlined, ClockCircleOutlined, ThunderboltOutlined, RightOutlined, UserOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
-import { getProfile, getResources, getLearningPath } from '../api/storage';
+import { getProfile, getResources, getMasteredTopics, getLearningHours } from '../api/storage';
 
 const { Title, Text } = Typography;
 
@@ -10,7 +10,8 @@ export default function HomePage() {
   const navigate = useNavigate();
   const profile = useMemo(getProfile, []);
   const resources = useMemo(getResources, []);
-  const path = useMemo(getLearningPath, []);
+  const mastered = useMemo(getMasteredTopics, []);
+  const hours = useMemo(getLearningHours, []);
   const completion = Math.round((profile.profile_completion || 0) * 100);
 
   return (
@@ -47,12 +48,12 @@ export default function HomePage() {
         </Col>
         <Col xs={12} lg={6}>
           <Card>
-            <Statistic title="已学章节" value={path?.node_sequence?.filter((n) => n.status === 'completed').length || 0}
-              suffix={`/ ${path?.node_sequence?.length || 10}`} prefix={<ThunderboltOutlined />} />
+            <Statistic title="已学章节" value={mastered.length}
+              suffix={mastered.length > 0 ? '个已掌握' : ''} prefix={<ThunderboltOutlined />} />
           </Card>
         </Col>
         <Col xs={12} lg={6}>
-          <Card><Statistic title="学习时长" value={0} suffix="小时" prefix={<ClockCircleOutlined />} /></Card>
+          <Card><Statistic title="学习时长" value={hours} suffix="小时" prefix={<ClockCircleOutlined />} /></Card>
         </Col>
       </Row>
     </div>

@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
-import { Card, Typography, Button, Tag, Space, Progress, Row, Col, Statistic, Empty, Switch, message } from 'antd';
+import { Card, Typography, Button, Tag, Space, Row, Col, Statistic, Empty, Switch, message } from 'antd';
 import { ThunderboltOutlined, TrophyOutlined, ClockCircleOutlined, CheckCircleOutlined, PlayCircleOutlined } from '@ant-design/icons';
-import { getProfile, getAssessments } from '../api/storage';
+import { getProfile, getAssessments, getMasteredTopics, setMasteredTopics, setLearningHours, getSavedPlan, setSavedPlan } from '../api/storage';
 
 const { Title, Text, Paragraph } = Typography;
 
@@ -39,8 +39,9 @@ const RESOURCE_LABELS: Record<string, string> = {
 };
 
 export default function LearningPath() {
-  const [plan, setPlan] = useState<Array<{ key: string; title: string; accuracy: number; hours: number; status: string; week: number; resources: string[] }> | null>(null);
-  const [masteredSet, setMasteredSet] = useState<Set<string>>(new Set());
+  const saved = getSavedPlan();
+  const [plan, setPlan] = useState<Array<{ key: string; title: string; accuracy: number; hours: number; status: string; week: number; resources: string[] }> | null>(saved);
+  const [masteredSet, setMasteredSet] = useState<Set<string>>(new Set(getMasteredTopics()));
 
   const profile = useMemo(getProfile, []);
   const assessments = useMemo(getAssessments, []);
@@ -113,12 +114,14 @@ export default function LearningPath() {
     }
 
     setPlan(planItems);
+    setSavedPlan(planItems);
     message.success('学习计划已生成！');
   };
 
   const totalHours = plan ? Math.round(plan.reduce((s, p) => s + p.hours, 0) * 10) / 10 : 0;
   const totalWeeks = plan ? Math.max(...plan.map((p) => p.week)) : 0;
   const mastered = plan ? plan.filter((p) => p.status === 'mastered' || masteredSet.has(p.key)).length : 0;
+  const manualCount = plan ? plan.filter((p) => masteredSet.has(p.key)).length : 0;
   const completed = assessments.filter((a) => a.sessionId).length > 0;
 
   return (
@@ -144,7 +147,7 @@ export default function LearningPath() {
               <Card><Statistic title="预计周数" value={totalWeeks} suffix="周" prefix={<PlayCircleOutlined />} /></Card>
             </Col>
             <Col xs={12} lg={6}>
-              <Card><Statistic title="已掌握" value={mastered} suffix={`/ ${plan.length}`} prefix={<CheckCircleOutlined />} valueStyle={{ color: '#52c41a' }} /></Card>
+              <Card><Statistic title={manualCount > 0 ? `已掌握 (含${manualCount}个手动标记)` : '已掌握'} value={mastered} suffix={`/ ${plan.length}`} prefix={<CheckCircleOutlined />} valueStyle={{ color: '#52c41a' }} /></Card>
             </Col>
             <Col xs={12} lg={6}>
               <Card><Statistic title="画像完成度" value={Math.round((profile.profile_completion || 0) * 100)} suffix="%" prefix={<TrophyOutlined />} /></Card>
@@ -160,30 +163,23 @@ export default function LearningPath() {
                 style={{ marginBottom: 16 }}>
                 {weekItems.map((item) => {
                   const isMastered = masteredSet.has(item.key);
+                  const displayStatus = isMastered ? 'mastered' : item.status;
                   return (
                     <div key={item.key} style={{
                       display: 'flex', alignItems: 'center', gap: 16, padding: '10px 0',
                       borderBottom: '1px solid #f0f0f0',
-                      opacity: isMastered ? 0.5 : 1,
                     }}>
                       <div style={{ minWidth: 140 }}>
-                        <Text strong delete={isMastered}>{item.title}</Text>
+                        <Text strong>{item.title}</Text>
                         <div>
                           <Tag color={
-                            item.status === 'mastered' ? 'success' :
-                            item.status === 'weak' ? 'error' : 'processing'
+                            displayStatus === 'mastered' ? 'success' :
+                            displayStatus === 'weak' ? 'error' : 'processing'
                           }>
-                            {item.status === 'mastered' ? '已掌握' : item.status === 'weak' ? '薄弱' : '进行中'}
+                            {displayStatus === 'mastered' ? '已掌握' : displayStatus === 'weak' ? '薄弱' : '进行中'}
                           </Tag>
                         </div>
                       </div>
-                      <Progress
-                        percent={item.accuracy}
-                        size="small"
-                        style={{ width: 100 }}
-                        strokeColor={isMastered ? '#52c41a' : item.accuracy >= 80 ? '#52c41a' : item.accuracy >= 60 ? '#faad14' : '#ff4d4f'}
-                        format={() => `${item.accuracy}%`}
-                      />
                       <Text type="secondary" style={{ minWidth: 60 }}>{item.hours}h</Text>
                       <Space size={4}>
                         {item.resources.map((r) => (
@@ -196,6 +192,10 @@ export default function LearningPath() {
                           const next = new Set(masteredSet);
                           v ? next.add(item.key) : next.delete(item.key);
                           setMasteredSet(next);
+                          setMasteredTopics([...next]);
+                          // Update hours from mastered items
+                          const masteredHours = plan!.filter((p) => next.has(p.key) || p.status === 'mastered').reduce((s, p) => s + p.hours, 0);
+                          setLearningHours(Math.round(masteredHours * 10) / 10);
                         }} />
                       </div>
                     </div>
