@@ -88,6 +88,54 @@
     "c2-对C的扩充": {
       "title": "C++对C语言的扩充",
       "topics": {
+        "动态分配与引用": {
+          "questions": [
+            {
+              "id": 8, "type": "multiple_choice",
+              "stem": "若要分配10个长度的整型动态数组，空处代码应如何补全？\n#include <iostream>\nusing namespace std;\nint main(){\n    ______________\n    return 0;\n}",
+              "options": [
+                "A. int *a = (int*)new(10 * sizeof(int));",
+                "B. int *a = (int*)new[10 * sizeof(int)];",
+                "C. int *a = new[10 * sizeof(int)];",
+                "D. int *a = new int[10];",
+                "E. int *a = new int[10]; delete[] a;",
+                "F. int *a = (int*)new(10 * sizeof(int)); free(a);",
+                "G. int *a = new[10 * sizeof(int)]; delete[] a;"
+              ],
+              "answer": ["E"],
+              "explanation": "C++中动态数组分配语法：int *a = new int[10]; 释放用 delete[] a;。区别于C语言的malloc/free。D缺少释放，E是完整正确的写法。"
+            },
+            {
+              "id": 9, "type": "multiple_choice",
+              "stem": "以下程序的输出结果为______。\n#include <iostream>\nusing namespace std;\nint main(){\n    int a = 3;\n    int *b = &a;\n    int &c = a;\n    c = *b * 2 + 1;\n    cout << a;\n    return 0;\n}",
+              "options": ["A. 3", "B. 7", "C. 一个地址", "D. 编译错误"],
+              "answer": ["B"],
+              "explanation": "b指向a，c是a的引用（别名）。*b=3，3*2+1=7赋给c即赋给a，输出7。注意前面有类型的&是引用，没有类型的是取地址符。"
+            },
+            {
+              "id": 10, "type": "multiple_choice",
+              "stem": "以下程序的输出为______。\n#include <iostream>\nusing namespace std;\nint main(){\n    int &a = 3;\n    int *b = &a;\n    int c = a;\n    c = *b * 2 + 1;\n    cout << a;\n    return 0;\n}",
+              "options": ["A. 3", "B. 7", "C. 一个地址", "D. 编译错误"],
+              "answer": ["D"],
+              "explanation": "引用类型只能是变量或对象的别名，不能是常量的别名。int &a = 3; 会编译错误。非常量引用不能绑定到字面常量。"
+            },
+            {
+              "id": 11, "type": "multiple_choice",
+              "stem": "C++对C语言的许多语法都兼容，以下可兼容的部分有______。",
+              "options": [
+                "A. 基本数据类型、主函数语法",
+                "B. 变量与常量的定义、运算符和表达式",
+                "C. 程序运行结构（判断、循环和转移语句）",
+                "D. extern和static",
+                "E. 头文件、函数的基本语法",
+                "F. 函数的默认形参",
+                "G. 引用类型"
+              ],
+              "answer": ["A", "B", "C", "D", "E"],
+              "explanation": "F/G是C++新增特性：函数默认形参和引用类型在C语言中不存在。A/B/C/D/E都是C和C++共有的语法，完全兼容。"
+            }
+          ]
+        },
         "C++基础": {
           "questions": [
             {
