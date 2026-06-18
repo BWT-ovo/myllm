@@ -7,6 +7,7 @@ import {
   BookOutlined,
   ApartmentOutlined,
   NodeIndexOutlined,
+  CodeOutlined,
   MessageOutlined,
   FormOutlined,
   BarChartOutlined,
@@ -32,6 +33,7 @@ const menuItems = [
   { key: '/analytics', icon: <BarChartOutlined />, label: '学习分析' },
   { key: '/question-bank', icon: <OrderedListOutlined />, label: '题库练习' },
   { key: '/learning-path', icon: <NodeIndexOutlined />, label: '学习路径' },
+  { key: '/code-practice', icon: <CodeOutlined />, label: '编程练习' },
 ];
 
 export default function AppLayout() {
