@@ -159,9 +159,19 @@ ${nextQuestion}
     reply = await sparkChat(llmMessages, { temperature: 0.7, maxTokens: 400 });
     reply = reply.replace(/```[\s\S]*?```/g, '').replace(/[*#`]/g, '').replace(/\n{3,}/g, '\n\n').trim();
   } catch {
+    const DIM_NAMES = {
+      knowledge_base: '你的学习背景和知识基础',
+      cognitive_style: '你的学习方式偏好（视觉/听觉/阅读/动手实践）',
+      format_preferences: '你偏好的学习材料类型',
+      error_patterns: '你容易出错的方面',
+      learning_pace: '你的学习节奏快慢',
+      motivation_profile: '你学习C++的主要动机',
+      complexity_preference: '你喜欢简单入门还是深入进阶',
+    };
+    const nextDimName = DIM_NAMES[missing[0]] || '更多关于你的学习情况';
     reply = missing.length === 0
-      ? '画像已完整！根据你的回答，我已经了解了你的学习特点。你可以前往学习中心开始个性化学习了。'
-      : `谢谢分享！接下来我想了解：${missing[0] || '更多关于你的学习情况'}。`;
+      ? '画像已完整！根据你的回答，我已经了解了你的学习特点。你可以前往学习中心开始个性化学习了！'
+      : `谢谢分享！接下来我想了解${nextDimName}。`;
   }
 
   profile.conversation_history.push({ role: 'assistant', content: reply.slice(0, 200) });
@@ -276,3 +286,4 @@ export function generateLearningPath(): {
     total_hours: nodes.length,
   };
 }
+

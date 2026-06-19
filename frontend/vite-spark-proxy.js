@@ -8,9 +8,9 @@ import crypto from 'crypto';
 
 const SPARK_HOST = 'spark-api-open.xf-yun.com';
 const SPARK_PATH = '/x2/chat/completions';
-const SPARK_APP_ID = 'eec1cfcf';
-const SPARK_API_KEY = '88c1a124e6c9f5f6fc4a458363452d5d';
-const SPARK_API_SECRET = 'YTkzZjZiNzMyNTYxMzczNWRlYzZkMTY3';
+const SPARK_APP_ID = process.env.SPARK_APP_ID;
+const SPARK_API_KEY = process.env.SPARK_API_KEY;
+const SPARK_API_SECRET = process.env.SPARK_API_SECRET;
 
 function buildSparkHeaders(body) {
   const date = new Date().toUTCString();
@@ -102,3 +102,4 @@ export default function sparkProxy() {
     },
   };
 }
+

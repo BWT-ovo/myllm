@@ -81,3 +81,4 @@ module.exports = async function handler(req, res) {
     return res.status(502).json({ error: `Spark proxy error: ${err.message}` });
   }
 };
+

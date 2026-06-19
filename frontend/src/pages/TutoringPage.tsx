@@ -5,7 +5,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
-import { tutorChat } from '../api/agents';
+import { tutorChat, updateProfileFromTutoring } from '../api/agents';
 import { addChatRecord } from '../api/storage';
 
 const { Title, Text } = Typography;
@@ -32,7 +32,7 @@ export default function TutoringPage() {
     setStreaming(true);
 
     try {
-      await tutorChat(question, [], (chunk) => {
+      await tutorChat(question, messages.slice(0).map(m => ({ role: m.role, content: m.content })), (chunk) => {
         setMessages((prev) => { const u = [...prev]; const last = u[u.length - 1]; if (last.streaming) last.content += chunk; return [...u]; });
       });
     } catch (e: unknown) {
@@ -41,6 +41,11 @@ export default function TutoringPage() {
     }
 
     setMessages((prev) => { const u = [...prev]; const last = u[u.length - 1]; last.streaming = false; return [...u]; });
+
+    // 随学随新：从答疑对话中更新画像
+    const allMsgs = [...messages, { role: 'user', content: question }];
+    updateProfileFromTutoring(allMsgs.slice(-4));
+
     setStreaming(false);
 
     // save to history
@@ -83,3 +88,4 @@ export default function TutoringPage() {
     </div>
   );
 }
+
