@@ -7,11 +7,10 @@
  * 部署后会得到地址: https://你的项目.vercel.app/api/spark
  */
 
-// ⚠️ 填入你的星火 API 凭据
 const SPARK_HOST = 'spark-api-open.xf-yun.com';
 const SPARK_PATH = '/x2/chat/completions';
-const SPARK_API_KEY = '88c1a124e6c9f5f6fc4a458363452d5d';
-const SPARK_API_SECRET = 'YTkzZjZiNzMyNTYxMzczNWRlYzZkMTY3';
+const SPARK_API_KEY = process.env.SPARK_API_KEY || '';
+const SPARK_API_SECRET = process.env.SPARK_API_SECRET || '';
 const crypto = require('crypto');
 
 module.exports = async function handler(req, res) {

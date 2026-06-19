@@ -8,6 +8,7 @@ import {
   ApartmentOutlined,
   NodeIndexOutlined,
   CodeOutlined,
+  PlayCircleOutlined,
   MessageOutlined,
   FormOutlined,
   BarChartOutlined,
